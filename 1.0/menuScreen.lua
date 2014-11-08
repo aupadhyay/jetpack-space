@@ -17,10 +17,12 @@ local playBtn
 
 local settingsBtn
 
+local title
+
 --functions
 
 function menuScreen:enterScene(e)
-	bg = display.newImageRect( "Icon.png",_W,_H)
+	bg = display.newImageRect( "images/backgroundJump.jpg",_W,_H)
 	bg.x = _W/2
 	bg.y = _H/2
 	menuScreenGroup:insert(bg)
@@ -40,6 +42,12 @@ function menuScreen:enterScene(e)
 	settingsBtn.y = _H
 	settingsBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (settingsBtn)
+
+	title = display.newText( "General Jump", 100, 100, native.systemFont, 50 )
+	title.x = _W/2
+	title.y = _H/2 - 100
+	menuScreenGroup:insert (title)
+
 
 end
 
