@@ -6,7 +6,7 @@ local bg = ("Icon.png")
 
 function settingsScreen:enterScene(e)
 print ("SETTINGS!")
-local text = display.newText("SETTINGS!", 100,100 native.systemFont, 24)
+local text = display.newText("SETTINGS!", 100,100,native.systemFont, 24)
 end
 
 
@@ -15,5 +15,4 @@ end
 settingsScreen:addEventListener("enterScene", settingsScreen)
 
 return settingsScreen
-end
 
