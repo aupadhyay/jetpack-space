@@ -12,7 +12,6 @@ function menuScreen:enterScene(e)
 	bg = display.newImageRect( "Icon.png",100,100)
 	bg.x = 0
 	bg.y = 0
-
 end
 
 
