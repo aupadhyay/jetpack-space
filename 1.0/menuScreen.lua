@@ -9,7 +9,6 @@ local bg
 
 
 function menuScreen:enterScene(e)
-	print("create")
 	bg = display.newImageRect( "Icon.png",100,100)
 	bg.x = 0
 	bg.y = 0
