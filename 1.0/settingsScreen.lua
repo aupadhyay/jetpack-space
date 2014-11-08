@@ -1,33 +1,27 @@
 local storyboard = require("storyboard")
 
 local settingsScreen = storyboard.newScene("settingsScreen")
-local bg = ("Icon.png")
+local bg
+local text
+local addHelpScreen = {}
 
 
 function settingsScreen:enterScene(e)
-<<<<<<< HEAD
-print ("SETTINGS!")
-local text = display.newText("SETTINGS!", 160,0, "COCOGOOSE", 24)
-text:setFillColor(50/255,130/255,240/255)
-end
+	print ("SETTINGS!")
+	text = display.newText("SETTINGS!", 160,100, "COCOGOOSE", 24)
+	text:setFillColor(50/255,130/255,240/255)
 
-
-function menuScreen:enterScene(e)
 	bg = display.newImageRect( "Icon-60.png",100,100)
 	bg.x = 270
 	bg.y = 475
-	bg:addEventListener( "tap", changeScreen )
+	bg:addEventListener( "tap", addHelpScreen )
 end
 
 
-
-=======
-	print ("SETTINGS!")    
-	local text = display.newText("SETTINGS!", 100,100, native.systemFont, 24)
+function addHelpScreen(e)
+	print("help tapped")
 end
 
-
->>>>>>> origin/master
 settingsScreen:addEventListener("enterScene", settingsScreen)
 
 return settingsScreen

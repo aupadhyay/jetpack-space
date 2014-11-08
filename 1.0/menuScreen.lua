@@ -22,12 +22,6 @@ local title
 --functions
 
 function menuScreen:enterScene(e)
-<<<<<<< HEAD
-	bg = display.newImageRect( "Icon.png",100,100)
-	bg.x = 270
-	bg.y = 475
-	bg:addEventListener( "tap", changeScreen )
-=======
 	bg = display.newImageRect( "images/backgroundJump.jpg",_W,_H)
 	bg.x = _W/2
 	bg.y = _H/2
@@ -55,7 +49,6 @@ function menuScreen:enterScene(e)
 	menuScreenGroup:insert (title)
 
 
->>>>>>> origin/master
 end
 
 
