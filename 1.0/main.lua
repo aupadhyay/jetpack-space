@@ -1,5 +1,1 @@
-<<<<<<< HEAD
---Jetpack-space 
-=======
-print("test")
->>>>>>> FETCH_HEAD
+CiderRunMode = {};CiderRunMode.runmode = true;CiderRunMode.assertImage = true;require "CiderDebugger";
