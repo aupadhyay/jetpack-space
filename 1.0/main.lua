@@ -1,1 +1,4 @@
-CiderRunMode = {};CiderRunMode.runmode = true;CiderRunMode.assertImage = true;require "CiderDebugger";
+local storyboard = require("storyboard")
+
+storyboard.gotoScene("menuScreen")
+
