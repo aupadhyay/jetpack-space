@@ -36,10 +36,6 @@ function gameScreen:createScene(e)
     scoreNumText = display.newText(scoreNum,_W/2+50,_H-30,36,native.systemFont)
     scoreNumText:setColor( 245, 53, 45 )
     
-  
-    
-    
-    
 end
 
 
