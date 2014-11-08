@@ -4,3 +4,4 @@ _H = display.contentHeight
 local storyboard = require("storyboard")
 
 storyboard.gotoScene("menuScreen")
+
