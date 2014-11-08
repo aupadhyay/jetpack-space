@@ -5,30 +5,20 @@ settings = {
 	
 	orientation = {
 		default = "portrait",
-		supported = { "portrait", }
+		supported = { "portait", }
 	},
 	
-	iphone = {
-		plist = {
-			UIStatusBarHidden = false,
-			UIPrerenderedIcon = true, -- set to false for "shine" overlay
-			--UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
-
-            --[[
-            -- iOS app URL schemes:
-            CFBundleURLTypes =
+    iphone =
+    {
+        plist =
+        {
+            UIAppFonts =
             {
-                {
-                    CFBundleURLSchemes =
-                    {
-                        "fbXXXXXXXXXXXXXX", -- example scheme for facebook
-                        "coronasdkapp", -- example second scheme
-                    }
-                }
-            }
-            --]]
-		}
-	},
+                "Cocogoose.otf"
+            },
+            UIApplicationExitsOnSuspend = true
+        },
+    },
 	
 	--[[
 	-- Android permissions

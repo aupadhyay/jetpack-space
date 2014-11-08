@@ -11,8 +11,8 @@ local changeScreen = {}
 
 function menuScreen:enterScene(e)
 	bg = display.newImageRect( "Icon.png",100,100)
-	bg.x = 0
-	bg.y = 0
+	bg.x = 270
+	bg.y = 475
 	bg:addEventListener( "tap", changeScreen )
 end
 
