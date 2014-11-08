@@ -5,6 +5,7 @@ local bg = ("Icon.png")
 
 
 function settingsScreen:enterScene(e)
+<<<<<<< HEAD
 print ("SETTINGS!")
 local text = display.newText("SETTINGS!", 160,0, "COCOGOOSE", 24)
 text:setFillColor(50/255,130/255,240/255)
@@ -20,6 +21,13 @@ end
 
 
 
+=======
+	print ("SETTINGS!")    
+	local text = display.newText("SETTINGS!", 100,100, native.systemFont, 24)
+end
+
+
+>>>>>>> origin/master
 settingsScreen:addEventListener("enterScene", settingsScreen)
 
 return settingsScreen

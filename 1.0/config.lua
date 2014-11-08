@@ -1,29 +1,14 @@
-application = {
-	content = {
-		width = 320,
-		height = 480, 
-		scale = "letterBox",
-		fps = 30,
-		
-		--[[
-        imageSuffix = {
-		    ["@2x"] = 2,
-		}
-		--]]
-	},
-
-    --[[
-    -- Push notifications
-
-    notification =
-    {
-        iphone =
-        {
-            types =
-            {
-                "badge", "sound", "alert", "newsstand"
-            }
-        }
-    }
-    --]]    
+application =
+{
+   content =
+   {
+      width = 320,
+      height = 320 * display.pixelHeight/display.pixelWidth,
+      scale = "letterBox",
+      imageSuffix =
+      {
+         ["@2x"] = 1.5,
+         ["@4x"] = 3.0,
+      },
+   },
 }
