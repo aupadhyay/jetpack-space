@@ -14,8 +14,6 @@ function menuScreen:enterScene(e)
 	bg.y = 0
 end
 
-
-
 menuScreen:addEventListener( "enterScene", menuScreen )
 
 return menuScreen
