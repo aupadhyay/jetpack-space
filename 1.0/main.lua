@@ -1,7 +1,6 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
+_W = display.contentWidth
+_H = display.contentHeight
 
--- Your code here
+local storyboard = require("storyboard")
+
+storyboard.gotoScene("menuScreen")
