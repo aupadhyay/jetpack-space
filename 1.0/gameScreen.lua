@@ -37,9 +37,6 @@ function gameScreen:createScene(e)
     scoreNumText:setColor( 245, 53, 45 )
     
   
-    
-    
-    
 end
 
 
