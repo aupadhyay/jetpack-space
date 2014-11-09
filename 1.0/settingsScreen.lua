@@ -17,6 +17,8 @@ local backBtn
 local addMenuScreen = {}
 local helpGroup = display.newGroup( )
 local backButtonTap = {}
+local mute
+local unmute
 
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
@@ -28,8 +30,8 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(text)
 
 	bg = display.newImageRect( "images/helpButton.png", 284, 45)
-	bg.x = _W/2
-	bg.y = _H/2
+	bg.x = _W/2 
+	bg.y = _H/2 + 30
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
 
@@ -49,6 +51,18 @@ function settingsScreen:enterScene(e)
 	backBtn.y = 30
 	settingsGroup:insert(backBtn)
 	backBtn:addEventListener( "tap", backButtonTap )
+
+	mute = display.newImageRect("images/mute.png", 100, 100)
+	mute.x = _W/2 - 60
+	mute.y = _H/2 - 80
+	settingsGroup:insert(mute)
+
+	unmute = display.newImageRect("images/unmute.png", 100, 100)
+	unmute.x = _W/2 + 60
+	unmute.y = _H/2 - 80
+	settingsGroup:insert(unmute)
+
+
 end
  
 function backButtonTap(e)
