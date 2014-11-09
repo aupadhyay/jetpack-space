@@ -8,6 +8,8 @@ local helpTitle
 local addHelpScreen = {}
 local helpGroup = display.newGroup()
 local helpBg
+local bgImage
+local instructionPage
 
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
@@ -20,10 +22,7 @@ function settingsScreen:enterScene(e)
 	bg.y = 475
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
-	
-	helpBg = display.newText("Tilt screen left and right to guide General Jump and avoid the astroids. Try not to die!", 100, 100, native.systemFont, 24)
-	helpBg = _W/2 - 200
-	helpBg = _H/2
+
 
 end
  
@@ -36,6 +35,10 @@ function addHelpScreen(e)
 
 	helpTitle = display.newText("INSTRUCTIONS!", 160,100, "COCOGOOSE", 24)
 	helpTitle:setFillColor(40/255,40/255,195/255)
+	instructionPage = display.newText("Tilt your device left or right \n \n to guide General Jump through \n \n the asteroid belt as he passes \n \n between lines of asteroids. \n \n  Avoid the asteroids along the \n \n edges of General's path.", 100, 100, native.systemFont, 20 )
+	instructionPage.x = _W/2 
+	instructionPage.y = _H/2 
+
 
 
 

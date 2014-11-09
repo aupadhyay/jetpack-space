@@ -17,9 +17,7 @@ local playBtn
 
 local settingsBtn
 
-local titleGJ
-
-
+local title
 
 
 
@@ -47,9 +45,12 @@ function menuScreen:enterScene(e)
 	settingsBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (settingsBtn)
 
-titleGJ = display.newImageRect("images/title.png",280, 130)
-titleGJ.x = _W/2
-titleGJ.y = _H/2-100
+	title = display.newText( "General Jump", 100, 100, native.systemFont, 50 )
+	title.x = _W/2
+	title.y = _H/2 - 100
+	title:setFillColor(255/255,153/255,51/255)
+	menuScreenGroup:insert (title)
+
 
 end
 
