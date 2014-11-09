@@ -21,6 +21,7 @@ local pauseButton
 local player
 local startButton
 local sun
+local score = 0
 local asteroid = {}
 local startGame = {}
 local spawnAsteroids = {}
@@ -58,7 +59,7 @@ function gameScreen:createScene(e)
     scoreText = display.newText("Score:",_W/2 + 70,15,native.systemFont, 25)--insert proper font
     scoreText:setFillColor(255/255,255/255,255/255)
     
-    scoreNumText = display.newText("100",_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
+    scoreNumText = display.newText(tostring(score),_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
     scoreNumText:setFillColor( 255/255,255/255, 255/255 )
     
     pauseButton = display.newImageRect("images/pauseBtn.png",30,30)--insert proper image
@@ -76,44 +77,61 @@ function startGame(e)
     eventListeners("add")
     print "The Game has Started!"
     startButton.isVisible = false
-    timer.performWithDelay( 250, spawnAsteriods, 1 )
+    timer.performWithDelay( 3000, spawnAsteriods, 1 )
+    timer.performWithDelay( 100,updateScore, -1 )
 
     physics:start()
 end   
 
+function updateScore()
+    score = score + 1
+    scoreNumText.text = tostring(score)
+end
+
 function spawnAsteriods(e)
-    local asteroidOne = math.random(0,_W)
-    for i = 1,4 do
+    local asteroidX = math.random(0, _W)
+    local asteroidY = math.random(-800, -100)
+    for i = 1,7 do
         asteroid[i] = display.newImageRect("Icon-60.png", 50,50)--insert proper image
-        asteroid[i].anchorX = 0.5
+        asteroid[i].anchorX = 0
         asteroid[i].anchorY = 0.5
-        asteroid[i].x = asteroidOne + i*50
-        asteroid[i].y = -30
-        physics.addBody( asteroid[i],"static", { friction=0.5, bounce=2.3 } )
+        asteroid[i].y = asteroidY
+        asteroid[i].x = asteroidX
+        asteroidX = math.random(0, _W*2)
+        asteroidY = math.random(-800,-50)
     end
 end
 
 function update()
-    for i  = 1,10,1 do
+
+    for i  = 1,7 do
         if(not(asteroid[i] == nil))then
+
             local left = player.contentBounds.xMin <= asteroid[i].contentBounds.xMin and player.contentBounds.xMax >= asteroid[i].contentBounds.xMin
             local right = player.contentBounds.xMin >= asteroid[i].contentBounds.xMin and player.contentBounds.xMin <= asteroid[i].contentBounds.xMax
             local up = player.contentBounds.yMin <= asteroid[i].contentBounds.yMin and player.contentBounds.yMax >= asteroid[i].contentBounds.yMin
             local down = player.contentBounds.yMin >= asteroid[i].contentBounds.yMin and player.contentBounds.yMin <= asteroid[i].contentBounds.yMax
-    
+        
             if( (left or right) and (up or down))then
                  print("collide")
             end
-    
-            print("one")
+        
             asteroid[i].y = asteroid[i].y + 3
+            if(asteroid[i].y >= _H + 30)then
+                recycleAsteroid(i)
+            end
         end
     end
 end
 
+function recycleAsteroid(num)
+    asteroid[num].y = math.random(-800,-50)
+    asteroid[num].x = math.random(0, _W) 
+end
+
 function event(action)
     if(action == "lose")then
-        local bg = display.newImageRect("images")
+        local bg = display.newImageRect("Icon.png")
     end
 
     if(action == "win")then
