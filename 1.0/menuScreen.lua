@@ -34,7 +34,6 @@ function menuScreen:enterScene(e)
 	playBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (playBtn)
 
-
 	settingsBtn = display.newImageRect( "Icon-Small.png", 50, 50 )
 	settingsBtn.anchorX = 1
 	settingsBtn.anchorY = 1
@@ -46,7 +45,7 @@ function menuScreen:enterScene(e)
 	title = display.newText( "General Jump", 100, 100, native.systemFont, 50 )
 	title.x = _W/2
 	title.y = _H/2 - 100
-	title:setFillColor(0,100,50)
+	title:setFillColor(255/255,153/255,51/255)
 	menuScreenGroup:insert (title)
 
 
