@@ -73,6 +73,42 @@ end
 
 function pauseTouch(e)
     print("pause")
+    pauseBg = display.newImageRect("Icon.png",230,280)
+    pauseBg.x = _W/2
+    pauseBg.y = _H/2
+
+    pauseText = display.newText("Pause", _W/2,163,"Game Over",100)
+    --pauseText:setFillColor( 45 )
+
+    resumeText = display.newText("Resume", _W/2,183+60,"Game Over",80)
+    --resumeText:setFillColor( 45 )
+    
+
+    menuText = display.newText("Main Menu", _W/2,183+120,"Game Over",80)
+    --menuText:setFillColor( 45 )
+
+    
+    startButton:removeEventListener( 'tap', startGame )
+
+    function resumeGame()
+        print "game resumed"
+        pauseBg.isVisible = false
+        pauseText.isVisible = false
+        resumeText.isVisible = false
+        menuText.isVisible = false
+        resumeText:removeEventListener( "tap", resumeGame )
+        menuText:removeEventListener( "tap", menuFunction )
+
+    end
+
+    function menuFunction()
+        print "menu button pressed"
+        storyboard.gotoScene( "menuScreen")
+
+    end
+resumeText:addEventListener( "tap", resumeGame )
+menuText:addEventListener( "tap", menuFunction )
+
 end
 
 --GAME FUNCTIONS
@@ -152,7 +188,14 @@ function event(action)
         --loseScoreText:setFillColor( 45 )
         
         local loseScoreNum = display.newText( (score),160,305,"Game Over",75 )
-        --loseScoreText:setFillColor( 45 
+        --loseScoreText:setFillColor( 45 )
+
+        local loseTry = display.newText( "Try Again",160,335,"Game Over",75 )
+        --loseTry:setFillColor( 45 )   
+
+        function tryAgain()
+
+        end 
     end
 end
 
