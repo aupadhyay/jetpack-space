@@ -18,6 +18,8 @@ local backBtn
 local addMenuScreen = {}
 local helpGroup = display.newGroup( )
 local backButtonTap = {}
+local mute
+local unmute
 
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
@@ -34,8 +36,8 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(text)
 
 	bg = display.newImageRect( "images/helpButton.png", 284, 45)
-	bg.x = _W/2
-	bg.y = _H/2
+	bg.x = _W/2 
+	bg.y = _H/2 + 30
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
 
@@ -57,9 +59,28 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(backBtn)
 	backBtn:addEventListener( "tap", backButtonTap )
 
+	mute = display.newImageRect("images/mute.png", 100, 100)
+	mute.x = _W/2 - 60
+	mute.y = _H/2 - 80
+	settingsGroup:insert(mute)
+	mute:addEventListener( 'tap', muteAudio )
+
+	unmute = display.newImageRect("images/unmute.png", 100, 100)
+	unmute.x = _W/2 + 60
+	unmute.y = _H/2 - 80
+	settingsGroup:insert(unmute)
+	unmute:addEventListener( 'tap', unmuteAudio )
 
 end
  
+function muteAudio(e)
+	audio.setVolume(0, {channel = 3})
+end
+
+function unmuteAudio()
+	audio.setVolume( 1, {channel = 3})
+end
+
 function backButtonTap(e)
 	print("tap")
 	storyboard.gotoScene("menuScreen")
@@ -83,11 +104,21 @@ function addHelpScreen(e)
 	helpTitle:setFillColor(126/255,86/255,167/255)
 	helpGroup:insert(helpTitle)
 
-	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100,  "Game Over", 50 )
+	local options  = {
+		text = "Tilt your device left or right to guide General Jump through the asteroid belt as he passes between obstacles.",
+		x = _W/2 + 10,
+		y = _H/2 + 150,
+		font = "Game Over",
+		fontSize = 70,
+		width = _W,
+		height = _H,
+		align = center
+
+	}	
+
+	instructionPage = display.newText(options)
 	instructionPage.anchorX = 0.5
 	instructionPage.anchorY = 0.5
-	instructionPage.x = _W/2 
-	instructionPage.y = _H/2 
 	helpGroup:insert(instructionPage)
 
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)

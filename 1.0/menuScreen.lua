@@ -18,11 +18,17 @@ local title
 local sun
 local mountain
 
+local music = audio.loadSound( "music/gameMusic.mp3" )
 
 
 --functions
 
 function menuScreen:enterScene(e)
+
+	local musicPlay = audio.play(music, {
+		channel = 3,
+		loops = -1
+	})
 	menuScreenGroup = display.newGroup()
 	gameListeners("add")
 	bg = display.newImageRect( "images/stars2.png",_W,_H)
