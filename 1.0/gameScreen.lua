@@ -67,6 +67,7 @@ function gameScreen:enterScene(e)
     mountain.x = _W/2
     mountain.y = _H - 60
     gameGroup:insert(mountain)
+    
     --Game Playable Elements
     player = display.newImageRect("images/player.png", 60,50)--insert proper image
     player.anchorX = 0.5
@@ -190,7 +191,7 @@ local group
 function event(action)
     eventListeners("remove")
     if(action == "lose")then
-        print(asteroid[1].y)
+        print("hello")
         group = display.newGroup()
         local bg = display.newImageRect("Icon.png", 300,300)
         bg.x = _W/2

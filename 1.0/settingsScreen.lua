@@ -68,8 +68,6 @@ function addHelpScreen(e)
 
 
 
-
-
 end
 
 function settingsScreen:exitScene(e)
