@@ -85,11 +85,21 @@ function addHelpScreen(e)
 	helpTitle:setFillColor(126/255,86/255,167/255)
 	helpGroup:insert(helpTitle)
 
-	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100,  "Game Over", 50 )
+	local options  = {
+		text = "Tilt your device left or right to guide General Jump through the asteroid belt as he passes between obstacles.",
+		x = _W/2 + 10,
+		y = _H/2 + 150,
+		font = "Game Over",
+		fontSize = 70,
+		width = _W,
+		height = _H,
+		align = center
+
+	}	
+
+	instructionPage = display.newText(options)
 	instructionPage.anchorX = 0.5
 	instructionPage.anchorY = 0.5
-	instructionPage.x = _W/2 
-	instructionPage.y = _H/2 
 	helpGroup:insert(instructionPage)
 
 	backHelp = display.newImageRect( "images/backBtn.png" , 100, 30)
