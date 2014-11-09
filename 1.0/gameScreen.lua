@@ -67,18 +67,22 @@ function gameScreen:createScene(e)
     pauseButton.anchorY = 0.5
     pauseButton.x = 35
     pauseButton.y = 35
+    pauseButton:addEventListener( "tap", pauseTouch)
 
 end
 
+function pauseTouch(e)
+    print("pause")
+end
 
 --GAME FUNCTIONS
 
 function startGame(e)
+    startButton:removeEventListener( 'tap', startGame )
     eventListeners("add")
     print "The Game has Started!"
     startButton.isVisible = false
-    timer.performWithDelay( 3000, spawnAsteriods, 1 )
-    timer.performWithDelay( 100,updateScore, -1 )
+
 
     physics:start()
 end   
@@ -118,7 +122,7 @@ function update()
             local down = player.contentBounds.yMin >= asteroid[i].contentBounds.yMin and player.contentBounds.yMin <= asteroid[i].contentBounds.yMax
         
             if( (left or right) and (up or down))then
-                 print("collide")
+                 event("lose")
             end
         
             asteroid[i].y = asteroid[i].y + 3
@@ -135,28 +139,33 @@ function recycleAsteroid(num)
 end
 
 function event(action)
+    eventListeners("remove")
     if(action == "lose")then
-        local bg = display.newImageRect("Icon.png")
-    end
+        local bg = display.newImageRect("Icon.png", 300,300)
+        bg.x = _W/2
+        bg.y = _H/2
+        
+        local text = display.newText("Game Over!", _W/2, _H/2 - 50, native.systemFont, 24)
 
-    if(action == "win")then
-        local bg = display.newImageRect( "images")
- 
+        local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2, native.systemFont, 24)
     end
 end
 
 function movePlayer(e)
     player.x = (e.xRaw * 100) + 160
 end
-
+local scoreTimer
 function eventListeners(action)
     if(action == "add")then
         Runtime:addEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        timer.performWithDelay( 3000, spawnAsteriods, 1 )
+        scoreTimer = timer.performWithDelay( 100,updateScore, -1 )
     end
     if(action == "remove")then
         Runtime:removeEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        timer.cancel( scoreTimer )
     end
 end
 

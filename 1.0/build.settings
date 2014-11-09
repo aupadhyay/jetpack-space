@@ -14,12 +14,9 @@ settings = {
         {
             UIAppFonts =
             {
-<<<<<<< HEAD
-                "game_over.ttf"
-=======
+                "game_over.ttf",
                 "Cocogoose.otf",
                 "8-bit.TTF"
->>>>>>> origin/master
             },
             UIApplicationExitsOnSuspend = true
         },
