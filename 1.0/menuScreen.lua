@@ -18,6 +18,8 @@ local title
 local sun
 local mountain
 
+
+
 --functions
 
 function menuScreen:enterScene(e)

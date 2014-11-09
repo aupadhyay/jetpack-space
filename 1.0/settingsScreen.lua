@@ -5,9 +5,11 @@ local settingsGroup = display.newGroup()
 local bg
 local text
 local helpTitle
-local helpBg
 local addHelpScreen = {}
 local helpGroup = display.newGroup()
+local helpBg
+local bgImage
+local instructionPage
 
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
@@ -20,6 +22,8 @@ function settingsScreen:enterScene(e)
 	bg.y = 475
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
+
+
 end
  
 function addHelpScreen(e)
@@ -27,13 +31,16 @@ function addHelpScreen(e)
 	print("help tapped")
 
 
-	helpBg = display.newImageRect("images/backgroundJump.jpg", _W, _H)
-	helpBg.x = _W/2
-	helpBg.y = _H/2
-	helpGroup:insert(helpBg)
+	
 
-	helpTitle = display.newText("INSTRUCTIONS!", 160,100, "COCOGOOSE", 24)
-	helpTitle:setFillColor(40/255,40/255,195/255)
+	helpTitle = display.newText("INSTRUCTIONS", 160,100, "COCOGOOSE", 24)
+	helpTitle:setFillColor(200/255,0/255,0/255)
+	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100,  "Comic Sans MS", 20 )
+	instructionPage.anchorX = 0.5
+	instructionPage.anchorY = 0.5
+	instructionPage.x = _W/2 
+	instructionPage.y = _H/2 
+
 
 
 
