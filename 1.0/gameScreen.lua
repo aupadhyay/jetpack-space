@@ -76,6 +76,7 @@ function gameScreen:enterScene(e)
     player.x = _W/2
     player.y = _H-50
     gameGroup:insert(player)
+    menuScreenGroup:insert(player)
 
     startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
     startButton.anchorX = 0.5
