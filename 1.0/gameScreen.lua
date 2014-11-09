@@ -14,12 +14,15 @@ system.setIdleTimer(false)
 system.setAccelerometerInterval(40)
 --game elements
 local bg
+local bg2
+local bg3
 local scoreChart
 local scoreText
 local scoreNumText
 local pauseButton
 local player
 local startButton
+local mountain
 local sun
 local score = 0
 local asteroid = {}
@@ -34,17 +37,36 @@ function gameScreen:enterScene(e)
     gameGroup = display.newGroup()
 
     --Game Elements
-    bg = display.newImageRect("images/Stars@1x.png",_W,_H)--insert proper image
+    bg = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg.anchorX = 0.5
     bg.anchorY = 0.5
     bg.x = _W/2
     bg.y = _H/2
     gameGroup:insert(bg)
 
+    bg2 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
+    bg2.anchorX = 0.5
+    bg2.anchorY = 0.5
+    bg2.x = _W/2
+    bg2.y = _H
+    gameGroup:insert(bg2)
+
+    bg3 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
+    bg3.anchorX = 0.5
+    bg3.anchorY = 0.5
+    bg3.x = _W/2
+    bg3.y = _H*2
+    gameGroup:insert(bg3)
+
     sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
     sun.x = 70
     sun.y = 30
     gameGroup:insert(sun)
+
+    mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+    mountain.x = _W/2
+    mountain.y = _H - 60
+    gameGroup:insert(mountain)
     --Game Playable Elements
     player = display.newImageRect("images/player.png", 60,50)--insert proper image
     player.anchorX = 0.5
@@ -85,7 +107,7 @@ function gameScreen:enterScene(e)
     local asteroidX = math.random(0, _W)
     local asteroidY = math.random(-800, -100)
     for i = 1,7 do
-        asteroid[i] = display.newImageRect("Icon-60.png", 50,50)--insert proper image
+        asteroid[i] = display.newImageRect("images/asteroid.png", 50,50)--insert proper image
         asteroid[i].anchorX = 0
         asteroid[i].anchorY = 0.5
         asteroid[i].y = asteroidY
@@ -118,6 +140,22 @@ end
 
 
 function update()
+    if(not(bg2 == nil))then
+        bg.y = bg.y - 4
+        bg2.y = bg2.y - 4
+        bg3.y = bg3.y - 4
+
+        if (bg.y + bg.contentHeight) < 0 then
+            bg:translate(0, _H*3)
+        end
+        if (bg2.y + bg2.contentHeight) < 0 then
+            bg2:translate(0, _H*3)
+        end
+        if (bg3.y + bg3.contentHeight) < 0 then
+            bg3:translate(0 ,_H*3)
+        end
+    end
+
     if(player.x >= _W)then
         player.x = 0
     elseif(player.x <= 0)then
@@ -165,7 +203,7 @@ function event(action)
         local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2, native.systemFont, 24)
         group:insert(scoreText)
 
-        local playAgain = display.newImageRect("Icon.png", bg.width, 50)
+        local playAgain = display.newImageRect("images/playAgain.png",284, 45)
         playAgain.x = _W/2
         playAgain.y = _H/2 + 50
         group:insert(playAgain)
@@ -199,6 +237,9 @@ function gameScreen:exitScene(e)
     gameGroup:removeSelf()
     group:removeSelf()
     score = 0
+
+    gameGroup = nil
+
 end
 
 gameScreen:addEventListener("destroyScene",gameScreen)

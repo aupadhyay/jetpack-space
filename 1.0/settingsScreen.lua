@@ -30,6 +30,14 @@ function settingsScreen:enterScene(e)
 	backButton.anchorY = 0
 	backButton.x = 0
 	backButton.y = 0
+
+	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
+    	sun.x = 70
+    	sun.y = 30
+	
+    	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+    	mountain.x = _W/2
+    	mountain.y = _H - 60
 end
  
 function addHelpScreen(e)
