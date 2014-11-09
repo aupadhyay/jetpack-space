@@ -11,8 +11,10 @@ local helpBg
 local sun 
 local mountain
 local bgImage
+local background
 local backHelp
 local instructionPage
+local bgHelp
 local backBtn
 local addMenuScreen = {}
 local helpGroup = display.newGroup( )
@@ -26,9 +28,15 @@ function settingsScreen:enterScene(e)
 	helpGroup = display.newGroup()
 	print ("SETTINGS!")
 
-	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 20)
-	text:setFillColor(50/255,130/255,240/255)
+	background = display.newImageRect("images/stars2.png", _W, _H)
+	background.x = _W/2
+	background.y = _H/2
+	settingsGroup:insert(background)
+
+	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 24)
+	text:setFillColor(126/255,86/255,167/255)
 	settingsGroup:insert(text)
+
 
 	bg = display.newImageRect( "images/helpButton.png", 284, 45)
 	bg.x = _W/2 
@@ -80,9 +88,22 @@ function addHelpScreen(e)
 	helpGroup = display.newGroup()
 	print("help tapped")
 
+	bgHelp = display.newImageRect("images/stars2.png", _W, _H)
+	bgHelp.x = _W/2
+	bgHelp.y = _H/2
+	helpGroup:insert(bgHelp)
 
+	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
+	sun.x = 70
+	sun.y = 30
+	helpGroup:insert(sun)
 
-	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8BIT WONDER", 20)
+	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+	mountain.x = _W/2
+	mountain.y = _H - 60
+	helpGroup:insert (mountain)
+
+	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8BIT WONDER", 24)
 	helpTitle:setFillColor(126/255,86/255,167/255)
 	helpGroup:insert(helpTitle)
 
