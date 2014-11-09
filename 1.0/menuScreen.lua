@@ -46,6 +46,7 @@ function menuScreen:enterScene(e)
 	title = display.newText( "General Jump", 100, 100, native.systemFont, 50 )
 	title.x = _W/2
 	title.y = _H/2 - 100
+	title:setFillColor(0,100,50)
 	menuScreenGroup:insert (title)
 
 
