@@ -5,7 +5,6 @@ local bg
 local text
 local addHelpScreen = {}
 
-
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
 	text = display.newText("SETTINGS!", 160,100, "COCOGOOSE", 24)
@@ -16,8 +15,7 @@ function settingsScreen:enterScene(e)
 	bg.y = 475
 	bg:addEventListener( "tap", addHelpScreen )
 end
-
-
+ 
 function addHelpScreen(e)
 	print("help tapped")
 end
