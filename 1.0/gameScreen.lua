@@ -67,18 +67,22 @@ function gameScreen:createScene(e)
     pauseButton.anchorY = 0.5
     pauseButton.x = 35
     pauseButton.y = 35
+    pauseButton:addEventListener( "tap", pauseTouch)
 
 end
 
+function pauseTouch(e)
+    print("pause")
+end
 
 --GAME FUNCTIONS
 
 function startGame(e)
+    startButton:removeEventListener( 'tap', startGame )
     eventListeners("add")
     print "The Game has Started!"
     startButton.isVisible = false
-    timer.performWithDelay( 3000, spawnAsteriods, 1 )
-    timer.performWithDelay( 100,updateScore, -1 )
+
 
     physics:start()
 end   
@@ -135,6 +139,7 @@ function recycleAsteroid(num)
 end
 
 function event(action)
+    eventListeners("remove")
     if(action == "lose")then
         local bg = display.newImageRect("Icon.png",230,280)
         bg.x = _W/2
@@ -147,30 +152,25 @@ function event(action)
         --loseScoreText:setFillColor( 45 )
         
         local loseScoreNum = display.newText( (score),160,305,"Game Over",75 )
-        --loseScoreText:setFillColor( 45 )
-
-
-
-    end
-
-    if(action == "win")then
-        local bg = display.newImageRect( "images")
- 
+        --loseScoreText:setFillColor( 45 
     end
 end
 
 function movePlayer(e)
     player.x = (e.xRaw * 100) + 160
 end
-
+local scoreTimer
 function eventListeners(action)
     if(action == "add")then
         Runtime:addEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        timer.performWithDelay( 3000, spawnAsteriods, 1 )
+        scoreTimer = timer.performWithDelay( 100,updateScore, -1 )
     end
     if(action == "remove")then
         Runtime:removeEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        timer.cancel( scoreTimer )
     end
 end
 
