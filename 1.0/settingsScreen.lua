@@ -10,6 +10,7 @@ local helpGroup = display.newGroup()
 local helpBg
 local bgImage
 local instructionPage
+local backButton
 
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
@@ -24,6 +25,11 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
 
+	backButton = display.newImageRect( "images/backBtn.png", 100 , 100 )
+	backButton.anchorX = 1
+	backButton.anchorY = 0
+	backButton.x = _W/2
+	backButton.y = _H/2]
 end
  
 function addHelpScreen(e)
