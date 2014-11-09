@@ -125,11 +125,11 @@ function addHelpScreen(e)
 	instructionPage.anchorY = 0.5
 	helpGroup:insert(instructionPage)
 
-	logo = display.newImageRect("images/blazeStudiosLogo.png", 300, 140)
-	logo.anchorX = 1
-	logo.anchorY = 1
-	logo.x = _W/2 + 170
-	logo.y = _H/2 + 280
+	--logo = display.newImageRect("images/blazeStudiosLogo.png", 300, 140)
+	--logo.anchorX = 1
+	--logo.anchorY = 1
+	--logo.x = _W/2 + 170
+	--logo.y = _H/2 + 280
 
 	backHelp = display.newImageRect( "images/backBtn.png" , 100, 30)
 	backHelp.x = 60
