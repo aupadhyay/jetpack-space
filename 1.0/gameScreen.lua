@@ -10,7 +10,8 @@ local gameScreen = storyboard.newScene("gameScreen")
 _W = display.contentWidth
 _H = display.contentHeight
 
-
+system.setIdleTimer(false)
+system.setAccelerometerInterval(40)
 --game elements
 local bg
 local scoreChart
@@ -36,7 +37,7 @@ function gameScreen:createScene(e)
 
     sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
     sun.x = 70
-    sun.y = 70
+    sun.y = 30
     
     --Game Playable Elements
     player = display.newImageRect("Icon-60.png", 60,50)--insert proper image
@@ -60,7 +61,7 @@ function gameScreen:createScene(e)
     scoreNumText = display.newText("100",_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
     scoreNumText:setFillColor( 255/255,255/255, 255/255 )
     
-    pauseButton = display.newImageRect("Icon-60.png",30,30)--insert proper image
+    pauseButton = display.newImageRect("images/pauseBtn.png",30,30)--insert proper image
     pauseButton.anchorX = 0.5
     pauseButton.anchorY = 0.5
     pauseButton.x = 35
@@ -117,7 +118,7 @@ function event(action)
 
     if(action == "win")then
         local bg = display.newImageRect( "images")
-
+ 
     end
 end
 
