@@ -21,6 +21,7 @@ local helpGroup = display.newGroup( )
 local backButtonTap = {}
 local mute
 local unmute
+local logo
 
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
@@ -116,16 +117,23 @@ function addHelpScreen(e)
 		height = _H,
 		align = center
 
-	}	
+	}
+
 
 	instructionPage = display.newText(options)
 	instructionPage.anchorX = 0.5
 	instructionPage.anchorY = 0.5
 	helpGroup:insert(instructionPage)
 
+	logo = display.newImageRect("images/blazeStudiosLogo.png", 300, 140)
+	logo.anchorX = 1
+	logo.anchorY = 1
+	logo.x = _W/2 + 170
+	logo.y = _H/2 + 280
+
 	backHelp = display.newImageRect( "images/backBtn.png" , 100, 30)
 	backHelp.x = 60
-	backHelp.y = 30
+	backHelp.y = 20
 	backHelp:addEventListener( "tap", backButtonTap )
 	helpGroup:insert(backHelp)
 

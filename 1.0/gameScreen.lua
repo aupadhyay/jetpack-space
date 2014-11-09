@@ -77,7 +77,6 @@ function gameScreen:enterScene(e)
     player.y = _H-50
     gameGroup:insert(player)
 
-
     playerJump = display.newImageRect( "images/sprite.png", 60,120)
     playerJump.x = -300
     playerJump.y = -300
