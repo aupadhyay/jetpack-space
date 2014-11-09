@@ -5,9 +5,9 @@ local settingsGroup = display.newGroup()
 local bg
 local text
 local helpTitle
-local helpBg
 local addHelpScreen = {}
 local helpGroup = display.newGroup()
+local helpBg
 
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
@@ -20,6 +20,11 @@ function settingsScreen:enterScene(e)
 	bg.y = 475
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
+	
+	helpBg = display.newText("Tilt screen left and right to guide General Jump and avoid the astroids. Try not to die!", 100, 100, native.systemFont, 24)
+	helpBg = _W/2 - 200
+	helpBg = _H/2
+
 end
  
 function addHelpScreen(e)
@@ -27,10 +32,7 @@ function addHelpScreen(e)
 	print("help tapped")
 
 
-	helpBg = display.newImageRect("images/backgroundJump.jpg", _W, _H)
-	helpBg.x = _W/2
-	helpBg.y = _H/2
-	helpGroup:insert(helpBg)
+	
 
 	helpTitle = display.newText("INSTRUCTIONS!", 160,100, "COCOGOOSE", 24)
 	helpTitle:setFillColor(40/255,40/255,195/255)
