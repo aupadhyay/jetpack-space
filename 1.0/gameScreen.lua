@@ -249,7 +249,7 @@ function event(action)
     if(action == "lose")then
         print("hello")
         group = display.newGroup()
-        local bg = display.newImageRect("Icon.png", 300,300)
+        local bg = display.newImageRect("images/space.png", 300,300)
         bg.x = _W/2
         bg.y = _H/2
         group:insert(bg)
@@ -309,7 +309,7 @@ function gameScreen:exitScene(e)
     scoreNumText:removeSelf()
     scoreText:removeSelf()
     gameGroup = nil
-
+print "play again"
 end
 
 gameScreen:addEventListener("destroyScene",gameScreen)
