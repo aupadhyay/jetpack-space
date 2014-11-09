@@ -140,7 +140,15 @@ function event(action)
         bg.x = _W/2
         bg.y = _H/2
 
-        local loseText = display.newText("You Lose!",156,143,"Game Over", 24)
+        local loseText = display.newText("You Lose!",156,183,"Game Over", 115)
+        --loseText:setFillColor( 45 )
+
+        local loseScoreText = display.newText( "Your Score is",160,240,"Game Over",80 )
+        --loseScoreText:setFillColor( 45 )
+        
+        local loseScoreNum = display.newText( (score),160,305,"Game Over",75 )
+        --loseScoreText:setFillColor( 45 )
+
 
 
     end
