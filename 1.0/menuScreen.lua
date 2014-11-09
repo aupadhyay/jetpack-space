@@ -21,6 +21,8 @@ local titleGJ
 
 
 
+
+
 --functions
 
 function menuScreen:enterScene(e)
@@ -36,11 +38,12 @@ function menuScreen:enterScene(e)
 	playBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (playBtn)
 
-	settingsBtn = display.newImageRect( "Icon-Small.png", 50, 50 )
+
+	settingsBtn = display.newImageRect( "images/cog.png", 50, 50 )
 	settingsBtn.anchorX = 1
 	settingsBtn.anchorY = 1
-	settingsBtn.x = _W
-	settingsBtn.y = _H
+	settingsBtn.x = _W - 10
+	settingsBtn.y = _H - 10
 	settingsBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (settingsBtn)
 
