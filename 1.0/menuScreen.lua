@@ -113,11 +113,16 @@ end
 
 function changeScreen(e)
 	if(e.target== settingsBtn)then
+		playBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', developerTap )
+		settingsBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("settingsScreen")
 	end
 
 	if(e.target == playBtn)then
 		playBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', developerTap )
+		settingsBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("gameScreen")
 	end
 end

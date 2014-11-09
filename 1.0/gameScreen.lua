@@ -76,7 +76,7 @@ function gameScreen:enterScene(e)
     player.x = _W/2
     player.y = _H-50
     gameGroup:insert(player)
-
+    
     playerJump = display.newImageRect( "images/sprite.png", 60,120)
     playerJump.x = -300
     playerJump.y = -300
@@ -134,6 +134,7 @@ function pauseTouch(e)
     pauseBg = display.newImageRect("images/space.png",230,280)
     pauseBg.x = _W/2
     pauseBg.y = _H/2
+    pauseBg.aplha = 0.01
     pauseGroup:insert(pauseBg)
 
     pauseText = display.newText("Pause", _W/2,163,"Game Over",100)

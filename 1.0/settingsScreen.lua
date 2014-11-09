@@ -108,7 +108,7 @@ function addHelpScreen(e)
 	helpGroup:insert(helpTitle)
 
 	local options  = {
-		text = "Tilt your device left or right to guide General Jump through the asteroid belt as he passes between obstacles.",
+		text = "Tilt your device left or right to guide Colonel Comet through the asteroid belt as he passes between obstacles.",
 		x = _W/2 + 10,
 		y = _H/2 + 150,
 		font = "Game Over",
