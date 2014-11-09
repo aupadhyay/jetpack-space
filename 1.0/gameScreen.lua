@@ -103,6 +103,11 @@ function spawnAsteriods(e)
 end
 
 function update()
+    if(player.x >= _W)then
+        player.x = 0
+    elseif(player.x <= 0)then
+        player.x = _W
+    end
 
     for i  = 1,7 do
         if(not(asteroid[i] == nil))then
