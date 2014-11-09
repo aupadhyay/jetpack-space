@@ -126,7 +126,7 @@ function pauseTouch(e)
     pauseGroup = display.newGroup()
     eventListeners("remove")
     print("pause")
-    pauseBg = display.newImageRect("Icon.png",230,280)
+    pauseBg = display.newImageRect("images/space.png",230,280)
     pauseBg.x = _W/2
     pauseBg.y = _H/2
     pauseGroup:insert(pauseBg)
