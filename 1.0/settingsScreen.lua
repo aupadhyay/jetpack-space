@@ -13,13 +13,13 @@ local instructionPage
 
 function settingsScreen:enterScene(e)
 	print ("SETTINGS!")
-	text = display.newText("SETTINGS!", 160,100, "COCOGOOSE", 24)
+	text = display.newText("SETTINGS!", 160,100, "8BIT WONDER", 24)
 	text:setFillColor(50/255,130/255,240/255)
 	settingsGroup:insert(text)
 
-	bg = display.newImageRect( "Icon-60.png",100,100)
-	bg.x = 270
-	bg.y = 475
+	bg = display.newImageRect( "images/helpButton.png", 284, 45)
+	bg.x = _W/2
+	bg.y = _H/2
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
 
@@ -33,7 +33,7 @@ function addHelpScreen(e)
 
 	
 
-	helpTitle = display.newText("INSTRUCTIONS", 160,100, "COCOGOOSE", 24)
+	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8 ", 24)
 	helpTitle:setFillColor(200/255,0/255,0/255)
 	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100,  "Comic Sans MS", 20 )
 	instructionPage.anchorX = 0.5

@@ -14,7 +14,8 @@ settings = {
         {
             UIAppFonts =
             {
-                "Cocogoose.otf"
+                "Cocogoose.otf",
+                "8-bit.TTF"
             },
             UIApplicationExitsOnSuspend = true
         },

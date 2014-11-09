@@ -40,7 +40,7 @@ function gameScreen:createScene(e)
     sun.y = 30
     
     --Game Playable Elements
-    player = display.newImageRect("Icon-60.png", 60,50)--insert proper image
+    player = display.newImageRect("images/player.png", 60,50)--insert proper image
     player.anchorX = 0.5
     player.anchorY = 0.5
     player.x = _W/2
