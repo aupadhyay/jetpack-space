@@ -53,7 +53,7 @@ function gameScreen:enterScene(e)
     player.y = _H-30
     gameGroup:insert(player)
 
-    startButton = display.newImageRect("Icon-60.png", 270,50)--insert proper image
+    startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
     startButton.anchorX = 0.5
     startButton.anchorY = 0.5
     startButton.x = _W/2
@@ -133,7 +133,7 @@ function update()
             local down = player.contentBounds.yMin >= asteroid[i].contentBounds.yMin and player.contentBounds.yMin <= asteroid[i].contentBounds.yMax
         
             if( (left or right) and (up or down))then
-                 event("lose")
+                event("lose")
             end
         
             asteroid[i].y = asteroid[i].y + 3
