@@ -77,6 +77,11 @@ function gameScreen:enterScene(e)
     player.y = _H-50
     gameGroup:insert(player)
 
+    playerJump = display.newImageRect( "images/sprite.png", 60,100)
+    playerJump.x = -300
+    playerJump.y = -300
+    gameGroup:insert(playerJump)
+
     startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
     startButton.anchorX = 0.5
     startButton.anchorY = 0.5
@@ -190,6 +195,7 @@ end
 function update()
     if(playerBoost)then
         player.y = player.y - 2
+        playerJump.y = playerJump.y - 2
     end
 
     if((playerBoost == false) and (player.y <= _H-51))then
@@ -247,17 +253,16 @@ local group
 function event(action)
     eventListeners("remove")
     if(action == "lose")then
-        print("hello")
         group = display.newGroup()
         local bg = display.newImageRect("images/space.png", 300,300)
         bg.x = _W/2
         bg.y = _H/2
         group:insert(bg)
         
-        local text = display.newText("Game Over!", _W/2, _H/2 - 50, native.systemFont, 24)
+        local text = display.newText("Game Over!", _W/2, _H/2 - 70,"Game Over", 124)
         group:insert(text)
 
-        local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2, native.systemFont, 24)
+        local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2- 10,"Game Over", 124)
         group:insert(scoreText)
             
         local playAgain = display.newImageRect("images/playAgain.png",284, 45)
@@ -272,11 +277,21 @@ function playAgainTap(e)
     storyboard.gotoScene( "menuScreen")
 end
 
+
 function boostPlayer(e)
     if(e.phase == "began")then
+        print("be")
         playerBoost = true
+        player.isVisible = false
+        playerJump.isVisible = true
+        playerJump.x = player.x
+        playerJump.y = player.y
     elseif(e.phase == "ended")then
         playerBoost = false
+        player.isVisible = true        
+        playerJump.isVisible = false
+        playerJump.x = -300
+        playerJump.y = -300
     end
 
 end
