@@ -23,6 +23,7 @@ local mountain
 --functions
 
 function menuScreen:enterScene(e)
+	menuScreenGroup = display.newGroup()
 	gameListeners("add")
 	bg = display.newImageRect( "images/stars2.png",_W,_H)
 	bg.x = 0
@@ -56,12 +57,6 @@ function menuScreen:enterScene(e)
 	settingsBtn.y = _H/2 + 75 
 	settingsBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (settingsBtn)
-
-	--[[title = display.newText( "General Jump", 100, 100, native.systemFont, 50 )
-	title.x = _W/2
-	title.y = _H/2 - 100
-	title:setFillColor(255/255,153/255,51/255)
-	menuScreenGroup:insert (title)--]]
 
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
 	sun.x = 70

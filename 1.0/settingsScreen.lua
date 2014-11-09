@@ -26,10 +26,10 @@ function settingsScreen:enterScene(e)
 	bg:addEventListener( "tap", addHelpScreen )
 
 	backButton = display.newImageRect( "images/backBtn.png", 100 , 100 )
-	backButton.anchorX = 1
+	backButton.anchorX = 0
 	backButton.anchorY = 0
-	backButton.x = _W/2
-	backButton.y = _H/2]
+	backButton.x = 0
+	backButton.y = 0
 end
  
 function addHelpScreen(e)
