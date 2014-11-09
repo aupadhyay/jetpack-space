@@ -35,7 +35,9 @@ function addHelpScreen(e)
 
 	helpTitle = display.newText("INSTRUCTIONS", 160,100, "COCOGOOSE", 24)
 	helpTitle:setFillColor(200/255,0/255,0/255)
-	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100, native.systemFont, 20 )
+	instructionPage = display.newText("Tilt your device left or right to \n \n guide General Jump through \n \n the asteroid belt as he passes \n \n between obstacles. Avoid the \n \n space-rocks along the edges \n \n of General's path.", 100, 100,  "Comic Sans MS", 20 )
+	instructionPage.anchorX = 0.5
+	instructionPage.anchorY = 0.5
 	instructionPage.x = _W/2 
 	instructionPage.y = _H/2 
 
