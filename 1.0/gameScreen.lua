@@ -54,11 +54,11 @@ function gameScreen:createScene(e)
     startButton:addEventListener("touch", startGame)
 
     --Score Chart
-    scoreText = display.newText("Score:",_W/2-70,15,native.systemFont, 40)--insert proper font
+    scoreText = display.newText("Score:",_W/2 + 70,15,native.systemFont, 25)--insert proper font
     scoreText:setFillColor(255/255,255/255,255/255)
     
-    scoreNumText = display.newText("100",_W/2+60,17,native.systemFont, 45)--insert proper font and scoreNum
-    scoreNumText:setFillColor( 245/255,53/255, 45/255 )
+    scoreNumText = display.newText("100",_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
+    scoreNumText:setFillColor( 255/255,255/255, 255/255 )
     
     pauseButton = display.newImageRect("Icon-60.png",30,30)--insert proper image
     pauseButton.anchorX = 0.5
@@ -72,7 +72,7 @@ end
 --GAME FUNCTIONS
 
 function startGame(e)
-    
+    eventListeners("add")
     print "The Game has Started!"
     startButton.isVisible = false
     timer.performWithDelay( 250, spawnAsteriods, 1 )
@@ -95,13 +95,48 @@ end
 function update()
     for i  = 1,10,1 do
         if(not(asteroid[i] == nil))then
+            local left = player.contentBounds.xMin <= asteroid[i].contentBounds.xMin and player.contentBounds.xMax >= asteroid[i].contentBounds.xMin
+            local right = player.contentBounds.xMin >= asteroid[i].contentBounds.xMin and player.contentBounds.xMin <= asteroid[i].contentBounds.xMax
+            local up = player.contentBounds.yMin <= asteroid[i].contentBounds.yMin and player.contentBounds.yMax >= asteroid[i].contentBounds.yMin
+            local down = player.contentBounds.yMin >= asteroid[i].contentBounds.yMin and player.contentBounds.yMin <= asteroid[i].contentBounds.yMax
+    
+            if( (left or right) and (up or down))then
+                 print("collide")
+            end
+    
+            print("one")
             asteroid[i].y = asteroid[i].y + 3
         end
     end
 end
 
+function event(action)
+    if(action == "lose")then
+        local bg = display.newImageRect("images")
+    end
+
+    if(action == "win")then
+        local bg = display.newImageRect( "images")
+
+    end
+end
+
+function movePlayer(e)
+    player.x = (e.xRaw * 100) + 160
+end
+
+function eventListeners(action)
+    if(action == "add")then
+        Runtime:addEventListener( "enterFrame", update )
+        Runtime:addEventListener( "accelerometer",  movePlayer)
+    end
+    if(action == "remove")then
+        Runtime:removeEventListener( "enterFrame", update )
+        Runtime:addEventListener( "accelerometer",  movePlayer)
+    end
+end
+
 gameScreen:addEventListener("createScene",gameScreen)
-Runtime:addEventListener( "enterFrame", update )
 
 
 return gameScreen
