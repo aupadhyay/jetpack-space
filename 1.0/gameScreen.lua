@@ -27,47 +27,73 @@ local startGame = {}
 local spawnAsteroids = {}
 local spinAsteroids = {}
 local update = {}
+local gameGroup
 
-function gameScreen:createScene(e)
+function gameScreen:enterScene(e)
+
+    gameGroup = display.newGroup()
+
     --Game Elements
     bg = display.newImageRect("images/Stars@1x.png",_W,_H)--insert proper image
     bg.anchorX = 0.5
     bg.anchorY = 0.5
     bg.x = _W/2
     bg.y = _H/2
+    gameGroup:insert(bg)
 
     sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
     sun.x = 70
     sun.y = 30
-    
+    gameGroup:insert(sun)
     --Game Playable Elements
     player = display.newImageRect("images/player.png", 60,50)--insert proper image
     player.anchorX = 0.5
     player.anchorY = 0.5
     player.x = _W/2
     player.y = _H-30
+    gameGroup:insert(player)
 
     startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
     startButton.anchorX = 0.5
     startButton.anchorY = 0.5
     startButton.x = _W/2
     startButton.y = _H/2
+    gameGroup:insert(startButton)
     
     startButton:addEventListener("touch", startGame)
 
     --Score Chart
     scoreText = display.newText("Score:",_W/2 + 70,15,native.systemFont, 25)--insert proper font
     scoreText:setFillColor(255/255,255/255,255/255)
+    gameGroup:insert(scoreText)
     
     scoreNumText = display.newText(tostring(score),_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
     scoreNumText:setFillColor( 255/255,255/255, 255/255 )
+    gameGroup:insert(scoreNumText)
+    
+    score = 0
+    scoreNumText.text = tostring(score)
     
     pauseButton = display.newImageRect("images/pauseBtn.png",30,30)--insert proper image
     pauseButton.anchorX = 0.5
     pauseButton.anchorY = 0.5
     pauseButton.x = 35
     pauseButton.y = 35
+    gameGroup:insert(pauseButton)
     pauseButton:addEventListener( "tap", pauseTouch)
+
+    local asteroidX = math.random(0, _W)
+    local asteroidY = math.random(-800, -100)
+    for i = 1,7 do
+        asteroid[i] = display.newImageRect("Icon-60.png", 50,50)--insert proper image
+        asteroid[i].anchorX = 0
+        asteroid[i].anchorY = 0.5
+        asteroid[i].y = asteroidY
+        asteroid[i].x = asteroidX
+        asteroidX = math.random(0, _W*2)
+        asteroidY = math.random(-800,-50)
+        gameGroup:insert(asteroid[i])
+    end
 
 end
 
@@ -82,8 +108,6 @@ function startGame(e)
     eventListeners("add")
     print "The Game has Started!"
     startButton.isVisible = false
-
-
     physics:start()
 end   
 
@@ -92,19 +116,6 @@ function updateScore()
     scoreNumText.text = tostring(score)
 end
 
-function spawnAsteriods(e)
-    local asteroidX = math.random(0, _W)
-    local asteroidY = math.random(-800, -100)
-    for i = 1,7 do
-        asteroid[i] = display.newImageRect("Icon-60.png", 50,50)--insert proper image
-        asteroid[i].anchorX = 0
-        asteroid[i].anchorY = 0.5
-        asteroid[i].y = asteroidY
-        asteroid[i].x = asteroidX
-        asteroidX = math.random(0, _W*2)
-        asteroidY = math.random(-800,-50)
-    end
-end
 
 function update()
     if(player.x >= _W)then
@@ -137,23 +148,33 @@ function recycleAsteroid(num)
     asteroid[num].y = math.random(-800,-50)
     asteroid[num].x = math.random(0, _W) 
 end
-
+local group
 function event(action)
     eventListeners("remove")
     if(action == "lose")then
-        local bg = display.newImageRect("Icon.png",230,280)
+        print(asteroid[1].y)
+        group = display.newGroup()
+        local bg = display.newImageRect("Icon.png", 300,300)
         bg.x = _W/2
         bg.y = _H/2
-
-        local loseText = display.newText("You Lose!",156,183,"Game Over", 115)
-        --loseText:setFillColor( 45 )
-
-        local loseScoreText = display.newText( "Your Score is",160,240,"Game Over",80 )
-        --loseScoreText:setFillColor( 45 )
+        group:insert(bg)
         
-        local loseScoreNum = display.newText( (score),160,305,"Game Over",75 )
-        --loseScoreText:setFillColor( 45 
+        local text = display.newText("Game Over!", _W/2, _H/2 - 50, native.systemFont, 24)
+        group:insert(text)
+
+        local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2, native.systemFont, 24)
+        group:insert(scoreText)
+
+        local playAgain = display.newImageRect("Icon.png", bg.width, 50)
+        playAgain.x = _W/2
+        playAgain.y = _H/2 + 50
+        group:insert(playAgain)
+        playAgain:addEventListener( 'tap', playAgainTap)
     end
+end
+
+function playAgainTap(e)
+    storyboard.gotoScene( "menuScreen")
 end
 
 function movePlayer(e)
@@ -164,7 +185,6 @@ function eventListeners(action)
     if(action == "add")then
         Runtime:addEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
-        timer.performWithDelay( 3000, spawnAsteriods, 1 )
         scoreTimer = timer.performWithDelay( 100,updateScore, -1 )
     end
     if(action == "remove")then
@@ -174,7 +194,15 @@ function eventListeners(action)
     end
 end
 
-gameScreen:addEventListener("createScene",gameScreen)
+function gameScreen:exitScene(e)
+    eventListeners("remove")
+    gameGroup:removeSelf()
+    group:removeSelf()
+    score = 0
+end
+
+gameScreen:addEventListener("destroyScene",gameScreen)
+gameScreen:addEventListener("enterScene",gameScreen)
 
 
 return gameScreen

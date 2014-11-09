@@ -45,7 +45,6 @@ function settingsScreen:enterScene(e)
 	backBtn.y = 30
 	settingsGroup:insert(backBtn)
 	backBtn:addEventListener( "tap", backButtonTap )
-
 end
  
 function backButtonTap(e)
