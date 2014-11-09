@@ -76,7 +76,7 @@ function gameScreen:enterScene(e)
     player.x = _W/2
     player.y = _H-50
     gameGroup:insert(player)
-    
+
     playerJump = display.newImageRect( "images/sprite.png", 60,120)
     playerJump.x = -300
     playerJump.y = -300
@@ -134,7 +134,6 @@ function pauseTouch(e)
     pauseBg = display.newImageRect("images/space.png",230,280)
     pauseBg.x = _W/2
     pauseBg.y = _H/2
-    pauseBg.aplha = 0.01
     pauseGroup:insert(pauseBg)
 
     pauseText = display.newText("Pause", _W/2,163,"Game Over",100)
@@ -164,7 +163,10 @@ function pauseTouch(e)
 
     function menuFunction()
         print "menu button pressed"
-        pauseGroup:removeSelf()
+                if (not(pauseGroup == nil)) then
+                pauseGroup:removeSelf()
+        end
+
         resumeText:removeEventListener( "tap", resumeGame )
         menuText:removeEventListener( "tap", menuFunction )
         scoreNumText:removeSelf()
@@ -260,7 +262,7 @@ function event(action)
         local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2- 10,"Game Over", 124)
         group:insert(scoreText)
             
-        local playAgain = display.newImageRect("images/playAgain.png",284, 45)
+         playAgain = display.newImageRect("images/playAgain.png",284, 45)
         playAgain.x = _W/2
         playAgain.y = _H/2 + 50
         group:insert(playAgain)
@@ -269,6 +271,7 @@ function event(action)
 end
 
 function playAgainTap(e)
+    playAgain:removeEventListener( 'tap', playAgainTap)
     storyboard.gotoScene( "menuScreen")
 end
 

@@ -129,7 +129,9 @@ end
 
 function menuScreen:exitScene(e)
 	gameListeners("remove")
+	if (not(menuScreenGroup==nil)) then
 	menuScreenGroup:removeSelf()
+    end
 end
 
 function gameListeners(action)
