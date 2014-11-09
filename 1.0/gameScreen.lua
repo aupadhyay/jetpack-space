@@ -93,11 +93,11 @@ function gameScreen:enterScene(e)
     startButton:addEventListener("touch", startGame)
 
     --Score Chart
-    scoreText = display.newText("Score:",_W/2 + 70,15,native.systemFont, 25)--insert proper font
+    scoreText = display.newText("Score:",_W/2 + 50,15,"8BIT Wonder", 20)--insert proper font
     scoreText:setFillColor(255/255,255/255,255/255)
     gameGroup:insert(scoreText)
     
-    scoreNumText = display.newText(tostring(score),_W - 30,17,native.systemFont, 25)--insert proper font and scoreNum
+    scoreNumText = display.newText(tostring(score),_W - 30,17,"8BIT Wonder", 20)--insert proper font and scoreNum
     scoreNumText:setFillColor( 255/255,255/255, 255/255 )
     gameGroup:insert(scoreNumText)
     
@@ -218,13 +218,7 @@ function update()
         if (bg3.y + bg3.contentHeight) < 0 then
             bg3:translate(0 ,_H*3)
         end
-    end
-
-    if(player.x >= _W)then
-        player.x = 0
-    elseif(player.x <= 0)then
-        player.x = _W
-    end
+    end   
 
     for i  = 1,7 do
         if(not(asteroid[i] == nil))then

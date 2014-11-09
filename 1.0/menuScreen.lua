@@ -16,6 +16,7 @@ local playBtn
 local settingsBtn
 local title
 local sun
+local developerBtn
 local mountain
 
 local music = audio.loadSound( "music/gameMusic.mp3" )
@@ -67,8 +68,8 @@ function menuScreen:enterScene(e)
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
 	sun.x = 70
 	sun.y = 30
-
 	menuScreenGroup:insert(sun)
+	
 	title = display.newImageRect("images/title.png", 220, 100)
 	title.x = _W/2
 	title.y = _H/2 - 100
@@ -79,8 +80,17 @@ function menuScreen:enterScene(e)
 	mountain.y = _H - 60
 	menuScreenGroup:insert(mountain)
 
+	developerBtn = display.newImageRect("images/Developer@1x.png", 284, 45)
+	developerBtn.x = _W/2
+	developerBtn.y = _H/2 + 150
+	developerBtn:addEventListener( 'tap', developerTap )
+
 end
 
+
+function developerTap(e)
+	system.openURL("http://www.blazegamestudios.webs.com")
+end
 function update()
 	if(not(bg2 == nil))then
 		bg.x = bg.x - 4
