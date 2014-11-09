@@ -1,4 +1,5 @@
 local storyboard = require("storyboard")
+local widget = require("widget")
 
 local settingsScreen = storyboard.newScene("settingsScreen")
 local settingsGroup = display.newGroup()
@@ -20,6 +21,10 @@ local helpGroup = display.newGroup( )
 local backButtonTap = {}
 local mute
 local unmute
+local btn 
+local phase
+local widget
+local options
 
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
@@ -70,6 +75,13 @@ function settingsScreen:enterScene(e)
 	unmute.y = _H/2 - 80
 	settingsGroup:insert(unmute)
 	unmute:addEventListener( 'tap', unmuteAudio )
+
+
+
+
+
+
+
 
 end
  
