@@ -12,6 +12,7 @@ local sun
 local mountain
 local bgImage
 local backHelp
+local background
 local instructionPage
 local backBtn
 local addMenuScreen = {}
@@ -23,6 +24,11 @@ function settingsScreen:enterScene(e)
 	helpGroup = display.newGroup()
 	print ("SETTINGS!")
 
+	background = display.newImageRect("images/stars2.png", _W, _H)
+	background.x = _W/2
+	background.y = _H/2
+	settingsGroup:insert(background)
+
 	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 20)
 	text:setFillColor(50/255,130/255,240/255)
 	settingsGroup:insert(text)
@@ -32,6 +38,7 @@ function settingsScreen:enterScene(e)
 	bg.y = _H/2
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
+
 
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
 	sun.x = 70
@@ -49,6 +56,8 @@ function settingsScreen:enterScene(e)
 	backBtn.y = 30
 	settingsGroup:insert(backBtn)
 	backBtn:addEventListener( "tap", backButtonTap )
+
+
 end
  
 function backButtonTap(e)
@@ -65,7 +74,10 @@ function addHelpScreen(e)
 	helpGroup = display.newGroup()
 	print("help tapped")
 
-
+	background = display.newImageRect("images/stars2.png", _W, _H)
+	background.x = _W/2
+	background.y = _H/2
+	helpGroup:insert(background)
 
 	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8BIT WONDER", 20)
 	helpTitle:setFillColor(126/255,86/255,167/255)
@@ -78,12 +90,21 @@ function addHelpScreen(e)
 	instructionPage.y = _H/2 
 	helpGroup:insert(instructionPage)
 
+	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
+	sun.x = 70
+	sun.y = 30
+	helpGroup:insert(sun)
+
+	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+	mountain.x = _W/2
+	mountain.y = _H - 60
+	helpGroup:insert (mountain)
+
 	backHelp = display.newImageRect( "images/backBtn.png" , 100, 30)
 	backHelp.x = 60
 	backHelp.y = 30
 	backHelp:addEventListener( "tap", backButtonTap )
 	helpGroup:insert(backHelp)
-
 end
 
 function settingsScreen:exitScene(e)

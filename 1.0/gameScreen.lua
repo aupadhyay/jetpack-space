@@ -22,6 +22,7 @@ local scoreNumText
 local pauseButton
 local player
 local startButton
+local playerBoost
 local mountain
 local sun
 local score = 0
@@ -39,21 +40,21 @@ function gameScreen:enterScene(e)
     --Game Elements
     bg = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg.anchorX = 0.5
-    bg.anchorY = 0.5
+    bg.anchorY = 0
     bg.x = _W/2
-    bg.y = _H/2
+    bg.y = 0
     gameGroup:insert(bg)
 
     bg2 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg2.anchorX = 0.5
-    bg2.anchorY = 0.5
+    bg2.anchorY = 0
     bg2.x = _W/2
     bg2.y = _H
     gameGroup:insert(bg2)
 
     bg3 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg3.anchorX = 0.5
-    bg3.anchorY = 0.5
+    bg3.anchorY = 0
     bg3.x = _W/2
     bg3.y = _H*2
     gameGroup:insert(bg3)
@@ -69,11 +70,11 @@ function gameScreen:enterScene(e)
     gameGroup:insert(mountain)
     
     --Game Playable Elements
-    player = display.newImageRect("images/player.png", 60,50)--insert proper image
+    player = display.newImageRect("images/player.png", 60,100)--insert proper image
     player.anchorX = 0.5
     player.anchorY = 0.5
     player.x = _W/2
-    player.y = _H-30
+    player.y = _H-50
     gameGroup:insert(player)
 
     startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
@@ -121,42 +122,52 @@ function gameScreen:enterScene(e)
 end
 
 function pauseTouch(e)
+    pauseButton:removeEventListener( 'tap', pauseTouch )
+    pauseGroup = display.newGroup()
+    eventListeners("remove")
     print("pause")
     pauseBg = display.newImageRect("Icon.png",230,280)
     pauseBg.x = _W/2
     pauseBg.y = _H/2
+    pauseGroup:insert(pauseBg)
 
     pauseText = display.newText("Pause", _W/2,163,"Game Over",100)
+    pauseGroup:insert(pauseText)
     --pauseText:setFillColor( 45 )
 
     resumeText = display.newText("Resume", _W/2,183+60,"Game Over",80)
+    pauseGroup:insert(resumeText)
     --resumeText:setFillColor( 45 )
     
 
     menuText = display.newText("Main Menu", _W/2,183+120,"Game Over",80)
+    pauseGroup:insert(menuText)
     --menuText:setFillColor( 45 )
 
     
     startButton:removeEventListener( 'tap', startGame )
 
     function resumeGame()
-        print "game resumed"
-        pauseBg.isVisible = false
-        pauseText.isVisible = false
-        resumeText.isVisible = false
-        menuText.isVisible = false
+        print("resume")
+        pauseGroup:removeSelf()
         resumeText:removeEventListener( "tap", resumeGame )
         menuText:removeEventListener( "tap", menuFunction )
-
+        pauseButton:addEventListener( 'tap', pauseTouch )
+        eventListeners("add")
     end
 
     function menuFunction()
         print "menu button pressed"
+        pauseGroup:removeSelf()
+        resumeText:removeEventListener( "tap", resumeGame )
+        menuText:removeEventListener( "tap", menuFunction )
+        scoreNumText:removeSelf()
+        scoreText:removeSelf()
         storyboard.gotoScene( "menuScreen")
 
     end
-resumeText:addEventListener( "tap", resumeGame )
-menuText:addEventListener( "tap", menuFunction )
+    resumeText:addEventListener( "tap", resumeGame )
+    menuText:addEventListener( "tap", menuFunction )
 
 end
 
@@ -177,6 +188,15 @@ end
 
 
 function update()
+    if(playerBoost)then
+        player.y = player.y - 2
+    end
+
+    if((playerBoost == false) and (player.y <= _H-51))then
+        player.y = player.y + 3
+    end
+
+
     if(not(bg2 == nil))then
         bg.y = bg.y - 4
         bg2.y = bg2.y - 4
@@ -252,19 +272,30 @@ function playAgainTap(e)
     storyboard.gotoScene( "menuScreen")
 end
 
+function boostPlayer(e)
+    if(e.phase == "began")then
+        playerBoost = true
+    elseif(e.phase == "ended")then
+        playerBoost = false
+    end
+
+end
+
 function movePlayer(e)
-    player.x = (e.xRaw * 100) + 160
+    player.x = display.contentCenterX + ( display.contentCenterX*( e.xGravity*3 ) )
 end
 local scoreTimer
 function eventListeners(action)
     if(action == "add")then
         Runtime:addEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        Runtime:addEventListener('touch', boostPlayer)
         scoreTimer = timer.performWithDelay( 100,updateScore, -1 )
     end
     if(action == "remove")then
         Runtime:removeEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
+        Runtime:removeEventListener('touch', boostPlayer)
         timer.cancel( scoreTimer )
     end
 end
@@ -273,8 +304,10 @@ function gameScreen:exitScene(e)
     eventListeners("remove")
     gameGroup:removeSelf()
     group:removeSelf()
+    pauseGroup:removeSelf()
     score = 0
-
+    scoreNumText:removeSelf()
+    scoreText:removeSelf()
     gameGroup = nil
 
 end

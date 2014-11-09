@@ -101,6 +101,7 @@ function changeScreen(e)
 	end
 
 	if(e.target == playBtn)then
+		playBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("gameScreen")
 	end
 end
