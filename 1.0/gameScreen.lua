@@ -47,7 +47,7 @@ function gameScreen:createScene(e)
     player.x = _W/2
     player.y = _H-30
 
-    startButton = display.newImageRect("Icon-60.png", 270,50)--insert proper image
+    startButton = display.newImageRect("images/playButton.png", 270,50)--insert proper image
     startButton.anchorX = 0.5
     startButton.anchorY = 0.5
     startButton.x = _W/2
@@ -118,7 +118,7 @@ function update()
             local down = player.contentBounds.yMin >= asteroid[i].contentBounds.yMin and player.contentBounds.yMin <= asteroid[i].contentBounds.yMax
         
             if( (left or right) and (up or down))then
-                 print("collide")
+                event("lose")
             end
         
             asteroid[i].y = asteroid[i].y + 3
@@ -136,7 +136,13 @@ end
 
 function event(action)
     if(action == "lose")then
-        local bg = display.newImageRect("Icon.png")
+        local bg = display.newImageRect("Icon.png",230,280)
+        bg.x = _W/2
+        bg.y = _H/2
+
+        local loseText = display.newText("You Lose!",156,143,"Game Over", 24)
+
+
     end
 
     if(action == "win")then
