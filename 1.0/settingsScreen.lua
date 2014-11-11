@@ -65,13 +65,22 @@ function settingsScreen:enterScene(e)
 	mute.x = _W/2 - 60
 	mute.y = _H/2 - 80
 	settingsGroup:insert(mute)
+	mute:addEventListener( 'tap', muteAudio )
 
 	unmute = display.newImageRect("images/unmute.png", 100, 100)
 	unmute.x = _W/2 + 60
 	unmute.y = _H/2 - 80
 	settingsGroup:insert(unmute)
+	unmute:addEventListener( 'tap', unmuteAudio )
 
+end
 
+function muteAudio(e)
+	audio.setVolume( 0 , {channel = 3} )
+end
+
+function unmuteAudio(e)
+	audio.setVolume( 1 , {channel = 3} )
 end
  
 function backButtonTap(e)

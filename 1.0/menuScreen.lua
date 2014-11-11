@@ -4,6 +4,11 @@ _W = display.contentWidth
 _H = display.contentHeight
 
 local storyboard = require("storyboard")
+local ads = require "ads"
+local provider = "admob"
+local appID
+
+
 
 local menuScreen = storyboard.newScene("menuScreen")
 
@@ -18,35 +23,33 @@ local title
 local sun
 local developerBtn
 local mountain
-
+system.activate("multitouch")
 local music = audio.loadSound( "music/gameMusic.mp3" )
 
 
 --functions
 
+
 function menuScreen:enterScene(e)
 
-	local musicPlay = audio.play(music, {
-		channel = 3,
-		loops = -1
-	})
+
 	menuScreenGroup = display.newGroup()
 	gameListeners("add")
 	bg = display.newImageRect( "images/stars2.png",_W,_H)
 	bg.x = 0
-	bg.y = _H/2
+	bg.y = _H/2 - 50
 	bg.anchorX = 0
 	menuScreenGroup:insert(bg)
 
 	bg2 = display.newImageRect( "images/stars2.png",_W,_H)
 	bg2.x = _W
-	bg2.y = _H/2
+	bg2.y = _H/2 - 50
 	bg2.anchorX = 0
 	menuScreenGroup:insert(bg2)
 
 	bg3 = display.newImageRect( "images/stars2.png",_W,_H)
 	bg3.x = _W*2
-	bg3.y = _H/2
+	bg3.y = _H/2 - 50
 	bg3.anchorX = 0
 	menuScreenGroup:insert(bg3)
 
@@ -57,6 +60,11 @@ function menuScreen:enterScene(e)
 	playBtn:addEventListener( "tap", changeScreen )
 	menuScreenGroup:insert (playBtn)
 
+	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+	mountain.x = _W/2
+	mountain.y = _H - 60 - 50
+	menuScreenGroup:insert(mountain)
+	
 	settingsBtn = display.newImageRect( "images/Settings@1x.png", 284, 45 )
 	settingsBtn.anchorX = 0.5
 	settingsBtn.anchorY = 0.5
@@ -75,15 +83,27 @@ function menuScreen:enterScene(e)
 	title.y = _H/2 - 100
 	menuScreenGroup:insert(title)
 
-	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
-	mountain.x = _W/2
-	mountain.y = _H - 60
-	menuScreenGroup:insert(mountain)
 
 	developerBtn = display.newImageRect("images/Developer@1x.png", 284, 45)
 	developerBtn.x = _W/2
 	developerBtn.y = _H/2 + 150
 	developerBtn:addEventListener( 'tap', developerTap )
+	menuScreenGroup:insert(developerBtn)
+
+	function adListener(e)
+	end
+	if(system.getInfo("platformName") == "iPhone OS")then
+		ads.init("admob", "ca-app-pub-6411000418609328/2598065893", adListener)
+		ads.show("banner", {x=0, y=_H - 50, "ca-app-pub-6411000418609328/2598065893"})
+	else
+		ads.init("admob", "ca-app-pub-6411000418609328/5551532299", adListener)
+		ads.show("banner", {x=0, y=_H-50, "ca-app-pub-6411000418609328/5551532299"})
+	end
+
+	local musicPlay = audio.play(music, {
+		channel = 3,
+		loops = -1
+	})
 
 end
 
@@ -113,11 +133,16 @@ end
 
 function changeScreen(e)
 	if(e.target== settingsBtn)then
+		playBtn:removeEventListener( 'tap', changeScreen )
+		settingsBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("settingsScreen")
 	end
 
 	if(e.target == playBtn)then
 		playBtn:removeEventListener( 'tap', changeScreen )
+		settingsBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("gameScreen")
 	end
 end

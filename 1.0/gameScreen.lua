@@ -14,6 +14,7 @@ system.setIdleTimer(false)
 system.setAccelerometerInterval(40)
 --game elements
 local bg
+local move = true
 local bg2
 local bg3
 local scoreChart
@@ -187,7 +188,7 @@ function startGame(e)
 end   
 
 function updateScore()
-    score = score + 1
+    score = score + 1 
     scoreNumText.text = tostring(score)
 end
 
@@ -201,7 +202,6 @@ function update()
     if((playerBoost == false) and (player.y <= _H-51))then
         player.y = player.y + 3
     end
-
 
     if(not(bg2 == nil))then
         bg.y = bg.y - 4
@@ -292,6 +292,7 @@ end
 
 function movePlayer(e)
     player.x = display.contentCenterX + ( display.contentCenterX*( e.xGravity*3 ) )
+    playerJump.x = display.contentCenterX + ( display.contentCenterX*( e.xGravity*3 ) ) 
 end
 local scoreTimer
 function eventListeners(action)

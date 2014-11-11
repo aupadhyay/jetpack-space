@@ -1,33 +1,37 @@
--- Supported values for orientation:
--- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
-
 settings = {
-	
-	orientation = {
-		default = "portrait",
-		supported = { "portait", }
-	},
-	
-    iphone =
+
+    plugins =
     {
-        plist =
+        ["CoronaProvider.ads.admob"] =
         {
-            UIAppFonts =
-            {
-                "game_over.ttf",
-                "Cocogoose.otf",
-                "8-bit.TTF"
-            },
-            UIApplicationExitsOnSuspend = true
+            publisherId = "com.coronalabs"
         },
+    },      
+  
+    orientation = {
+        default = "portrait",
+        supported = { "portrait", }
     },
-	
-	--[[
-	-- Android permissions
+    
+    iphone = {
+        plist = {
+            UIStatusBarHidden = false,
+            UIPrerenderedIcon = true, -- set to false for "shine" overlay
+                        
+                        UIAppFonts = 
+                        {
+                                "game_over.ttf", 
+                                "Cocogoose.otf", 
+                                "8-bit.TTF"
+                        }
+        }
+    },
+    
+    -- Android permissions
 
-	androidPermissions = {
-  		"android.permission.INTERNET",
-  	},
+    androidPermissions = {
+        "android.permission.INTERNET",
+    },
 
-	]]--
+    
 }
