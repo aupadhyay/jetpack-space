@@ -134,22 +134,24 @@ end
 function changeScreen(e)
 	if(e.target== settingsBtn)then
 		playBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', developerTap )
 		settingsBtn:removeEventListener( 'tap', changeScreen )
-		developerBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("settingsScreen")
 	end
 
 	if(e.target == playBtn)then
 		playBtn:removeEventListener( 'tap', changeScreen )
+		developerBtn:removeEventListener( 'tap', developerTap )
 		settingsBtn:removeEventListener( 'tap', changeScreen )
-		developerBtn:removeEventListener( 'tap', changeScreen )
 		storyboard.gotoScene("gameScreen")
 	end
 end
 
 function menuScreen:exitScene(e)
 	gameListeners("remove")
+	if (not(menuScreenGroup==nil)) then
 	menuScreenGroup:removeSelf()
+    end
 end
 
 function gameListeners(action)

@@ -164,7 +164,10 @@ function pauseTouch(e)
 
     function menuFunction()
         print "menu button pressed"
-        pauseGroup:removeSelf()
+                if (not(pauseGroup == nil)) then
+                pauseGroup:removeSelf()
+        end
+
         resumeText:removeEventListener( "tap", resumeGame )
         menuText:removeEventListener( "tap", menuFunction )
         scoreNumText:removeSelf()
@@ -259,7 +262,7 @@ function event(action)
         local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2- 10,"Game Over", 124)
         group:insert(scoreText)
             
-        local playAgain = display.newImageRect("images/playAgain.png",284, 45)
+         playAgain = display.newImageRect("images/playAgain.png",284, 45)
         playAgain.x = _W/2
         playAgain.y = _H/2 + 50
         group:insert(playAgain)
@@ -268,6 +271,7 @@ function event(action)
 end
 
 function playAgainTap(e)
+    playAgain:removeEventListener( 'tap', playAgainTap)
     storyboard.gotoScene( "menuScreen")
 end
 
