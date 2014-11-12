@@ -205,6 +205,16 @@ function update()
         player.y = player.y + 3
     end
 
+    if( ((player.x <= 0) or (playerJump.x <= 0)) and not(playerJump.x == -300))then
+        player.x = _W - 30
+        playerJump.x = _W - 30
+    end
+
+    if((player.x >= _W + 30) or (playerJump.x >= _W + 30))then
+        player.x = 30
+        playerJump.x = 30
+    end
+
     if(not(bg2 == nil))then
         bg.y = bg.y - 4
         bg2.y = bg2.y - 4
@@ -277,7 +287,6 @@ end
 
 function boostPlayer(e)
     if(e.phase == "began")then
-        print("be")
         playerBoost = true
         player.isVisible = false
         playerJump.isVisible = true
