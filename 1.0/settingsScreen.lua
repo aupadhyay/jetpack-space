@@ -73,7 +73,6 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(unmute)
 	unmute:addEventListener( 'tap', unmuteAudio )
 
-end
 
 function muteAudio(e)
 	audio.setVolume( 0 , {channel = 3} )
@@ -83,6 +82,15 @@ function unmuteAudio(e)
 	audio.setVolume( 1 , {channel = 3} )
 end
  
+function muteAudio(e)
+	audio.setVolume( 0, {channel = 3} )
+end
+
+ 
+function unmuteAudio(e)
+	audio.setVolume( 1, {channel = 3} )
+end
+
 function backButtonTap(e)
 	print("tap")
 	storyboard.gotoScene("menuScreen")
