@@ -75,6 +75,7 @@ function settingsScreen:enterScene(e)
 
 end
 
+
 function muteAudio(e)
 	audio.setVolume( 0 , {channel = 3} )
 end
@@ -83,6 +84,7 @@ function unmuteAudio(e)
 	audio.setVolume( 1 , {channel = 3} )
 end
  
+
 function backButtonTap(e)
 	print("tap")
 	storyboard.gotoScene("menuScreen")
