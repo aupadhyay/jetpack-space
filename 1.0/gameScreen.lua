@@ -104,7 +104,7 @@ function gameScreen:enterScene(e)
     score = 0
     scoreNumText.text = tostring(score)
     
-    pauseButton = display.newImageRect("images/pauseBtn.png",30,30)--insert proper image
+    pauseButton = display.newImageRect("images/pauseBtn.png",50,50)--insert proper image
     pauseButton.anchorX = 0.5
     pauseButton.anchorY = 0.5
     pauseButton.x = 35

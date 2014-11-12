@@ -12,16 +12,20 @@ local sun
 local mountain
 local bgImage
 local background
+local creditsBtn
 local backHelp
 local instructionPage
 local bgHelp
 local backBtn
 local addMenuScreen = {}
 local helpGroup = display.newGroup( )
+local creditsGroup = display.newGroup( )
 local backButtonTap = {}
 local mute
 local unmute
-local logo
+local bgCredits
+local creditsTitle
+local creditsText
 
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
@@ -73,6 +77,12 @@ function settingsScreen:enterScene(e)
 	settingsGroup:insert(unmute)
 	unmute:addEventListener( 'tap', unmuteAudio )
 
+	creditsBtn = display.newImageRect("images/Credits@3x.png",284, 45)
+	creditsBtn.x = _W/2 
+	creditsBtn.y = _H/2 + 100
+	settingsGroup:insert(creditsBtn)
+	creditsBtn:addEventListener( "tap", addCreditsScreen )
+
 end
 
 
@@ -91,6 +101,34 @@ function backButtonTap(e)
 	helpGroup = nil
 end
 
+function addCreditsScreen(e)
+	backBtn:removeEventListener( 'tap', backButtonTap )
+	settingsGroup:removeSelf()
+	settingsGroup = nil
+	creditsGroup = display.newGroup()
+
+	bgCredits = display.newImageRect("images/stars2.png", _W, _H)
+	bgCredits.x = _W/2
+	bgCredits.y = _H/2
+	creditsGroup:insert(bgCredits)
+
+	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
+	sun.x = 70
+	sun.y = 30
+	creditsGroup:insert(sun)
+
+	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
+	mountain.x = _W/2
+	mountain.y = _H - 60 - 50
+	creditsGroup:insert (mountain)
+
+
+	creditsTitle = display.newText("Credits", _W/2, 100, "8BIT WONDER", 24)
+	creditsTitle:setFillColor(126/255,86/255,167/255)
+	creditsGroup:insert(creditsTitle)
+
+
+end
 
 function addHelpScreen(e)
 	backBtn:removeEventListener( 'tap', backButtonTap )
@@ -136,11 +174,6 @@ function addHelpScreen(e)
 	instructionPage.anchorY = 0.5
 	helpGroup:insert(instructionPage)
 
-	--logo = display.newImageRect("images/blazeStudiosLogo.png", 300, 140)
-	--logo.anchorX = 1
-	--logo.anchorY = 1
-	--logo.x = _W/2 + 170
-	--logo.y = _H/2 + 280
 
 	backHelp = display.newImageRect( "images/backBtn.png" , 100, 30)
 	backHelp.x = 60
