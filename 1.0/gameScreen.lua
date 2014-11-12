@@ -43,21 +43,21 @@ function gameScreen:enterScene(e)
     bg.anchorX = 0.5
     bg.anchorY = 0
     bg.x = _W/2
-    bg.y = 0
+    bg.y = 0 - 50
     gameGroup:insert(bg)
 
     bg2 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg2.anchorX = 0.5
-    bg2.anchorY = 0
+    bg2.anchorY = 0 
     bg2.x = _W/2
-    bg2.y = _H
+    bg2.y = _H - 50
     gameGroup:insert(bg2)
 
     bg3 = display.newImageRect("images/stars2.png",_W,_H)--insert proper image
     bg3.anchorX = 0.5
     bg3.anchorY = 0
     bg3.x = _W/2
-    bg3.y = _H*2
+    bg3.y = _H*2 - 50
     gameGroup:insert(bg3)
 
     sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
@@ -67,7 +67,7 @@ function gameScreen:enterScene(e)
 
     mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
     mountain.x = _W/2
-    mountain.y = _H - 60
+    mountain.y = _H - 60 - 50
     gameGroup:insert(mountain)
     
     --Game Playable Elements
@@ -75,7 +75,7 @@ function gameScreen:enterScene(e)
     player.anchorX = 0.5
     player.anchorY = 0.5
     player.x = _W/2
-    player.y = _H-50
+    player.y = _H-50 - 50
     gameGroup:insert(player)
 
     playerJump = display.newImageRect( "images/sprite.png", 60,120)
@@ -87,7 +87,7 @@ function gameScreen:enterScene(e)
     startButton.anchorX = 0.5
     startButton.anchorY = 0.5
     startButton.x = _W/2
-    startButton.y = _H/2
+    startButton.y = _H/2 - 50
     gameGroup:insert(startButton)
     
     startButton:addEventListener("touch", startGame)
@@ -131,7 +131,6 @@ function pauseTouch(e)
     pauseButton:removeEventListener( 'tap', pauseTouch )
     pauseGroup = display.newGroup()
     eventListeners("remove")
-    print("pause")
     pauseBg = display.newImageRect("images/space.png",230,280)
     pauseBg.x = _W/2
     pauseBg.y = _H/2
@@ -202,7 +201,7 @@ function update()
         playerJump.y = playerJump.y - 2
     end
 
-    if((playerBoost == false) and (player.y <= _H-51))then
+    if((playerBoost == false) and (player.y <= _H-51 - 50))then
         player.y = player.y + 3
     end
 
@@ -308,7 +307,7 @@ function eventListeners(action)
     end
     if(action == "remove")then
         Runtime:removeEventListener( "enterFrame", update )
-        Runtime:addEventListener( "accelerometer",  movePlayer)
+        Runtime:removeEventListener( "accelerometer",  movePlayer)
         Runtime:removeEventListener('touch', boostPlayer)
         timer.cancel( scoreTimer )
     end

@@ -30,7 +30,7 @@ function settingsScreen:enterScene(e)
 
 	background = display.newImageRect("images/stars2.png", _W, _H)
 	background.x = _W/2
-	background.y = _H/2
+	background.y = _H/2 - 50
 	settingsGroup:insert(background)
 
 	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 24)
@@ -52,7 +52,7 @@ function settingsScreen:enterScene(e)
 
 	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
 	mountain.x = _W/2
-	mountain.y = _H - 60
+	mountain.y = _H - 60 - 50
 	settingsGroup:insert (mountain)
 
 	backBtn = display.newImageRect("images/backBtn.png", 100, 30)
@@ -109,7 +109,7 @@ function addHelpScreen(e)
 
 	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
 	mountain.x = _W/2
-	mountain.y = _H - 60
+	mountain.y = _H - 60 - 50
 	helpGroup:insert (mountain)
 
 	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8BIT WONDER", 24)
@@ -119,10 +119,10 @@ function addHelpScreen(e)
 	local options  = {
 		text = "Tilt your device left or right to guide Colonel Comet through the asteroid belt as he passes between obstacles.",
 		x = _W/2 + 10,
-		y = _H/2 + 150,
+		y = _H/2 + 150 - 20,
 		font = "Game Over",
-		fontSize = 70,
-		width = _W,
+		fontSize = 65,
+		width = _W - 10,
 		height = _H,
 		align = center
 
