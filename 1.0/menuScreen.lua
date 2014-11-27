@@ -25,33 +25,37 @@ local developerBtn
 local mountain
 system.activate("multitouch")
 local music = audio.loadSound( "music/gameMusic.mp3" )
-
+--local musicPlay = audio.play(music, {	channel = 3,
+--		loops = -1
+--	})
 
 --functions
 
+function menuScreen:createScene(e)
+	gameListeners("add")
+end
+
 
 function menuScreen:enterScene(e)
-
-
-	menuScreenGroup = display.newGroup()
-	gameListeners("add")
 	bg = display.newImageRect( "images/stars2.png",_W,_H)
 	bg.x = 0
 	bg.y = _H/2 - 50
 	bg.anchorX = 0
-	menuScreenGroup:insert(bg)
+	
 
 	bg2 = display.newImageRect( "images/stars2.png",_W,_H)
 	bg2.x = _W
 	bg2.y = _H/2 - 50
 	bg2.anchorX = 0
-	menuScreenGroup:insert(bg2)
+	
 
 	bg3 = display.newImageRect( "images/stars2.png",_W,_H)
 	bg3.x = _W*2
 	bg3.y = _H/2 - 50
 	bg3.anchorX = 0
-	menuScreenGroup:insert(bg3)
+
+
+	menuScreenGroup = display.newGroup()
 
 
 	playBtn = display.newImageRect ("images/Play@1x.png", 284, 45)
@@ -78,7 +82,7 @@ function menuScreen:enterScene(e)
 	sun.y = 30
 	menuScreenGroup:insert(sun)
 	
-	title = display.newImageRect("images/title.png", 220, 100)
+	title = display.newImageRect("images/title_1.png", 220, 100)
 	title.x = _W/2
 	title.y = _H/2 - 100
 	menuScreenGroup:insert(title)
@@ -90,6 +94,8 @@ function menuScreen:enterScene(e)
 	developerBtn:addEventListener( 'tap', developerTap )
 	menuScreenGroup:insert(developerBtn)
 
+
+
 	function adListener(e)
 	end
 	if(system.getInfo("platformName") == "iPhone OS")then
@@ -100,10 +106,7 @@ function menuScreen:enterScene(e)
 		ads.show("banner", {x=0, y=_H-50, "ca-app-pub-6411000418609328/5551532299"})
 	end
 
-	local musicPlay = audio.play(music, {
-		channel = 3,
-		loops = -1
-	})
+
 
 end
 
@@ -159,12 +162,13 @@ function gameListeners(action)
 		Runtime:addEventListener( "enterFrame", update)
 	end
 	if(action == "remove")then
-		Runtime:removeEventListener( "enterFrame", update)
+		--Runtime:removeEventListener( "enterFrame", update)
 	end
 end
 
 menuScreen:addEventListener( "enterScene", menuScreen )
 menuScreen:addEventListener( "exitScene", menuScreen )
+menuScreen:addEventListener( "createScene", menuScreen )
 
 
 return menuScreen

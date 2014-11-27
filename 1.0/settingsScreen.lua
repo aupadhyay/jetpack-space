@@ -1,4 +1,6 @@
 local storyboard = require("storyboard")
+local widget = require("widget")
+
 
 local settingsScreen = storyboard.newScene("settingsScreen")
 local settingsGroup = display.newGroup()
@@ -17,6 +19,8 @@ local backHelp
 local instructionPage
 local bgHelp
 local backBtn
+local highScoreFile
+local highScoreText
 local addMenuScreen = {}
 local helpGroup = display.newGroup( )
 local creditsGroup = display.newGroup( )
@@ -30,12 +34,7 @@ local creditsText
 function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
 	helpGroup = display.newGroup()
-	print ("SETTINGS!")
 
-	background = display.newImageRect("images/stars2.png", _W, _H)
-	background.x = _W/2
-	background.y = _H/2 - 50
-	settingsGroup:insert(background)
 
 	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 24)
 	text:setFillColor(126/255,86/255,167/255)
@@ -44,7 +43,7 @@ function settingsScreen:enterScene(e)
 
 	bg = display.newImageRect( "images/helpButton.png", 284, 45)
 	bg.x = _W/2 
-	bg.y = _H/2 + 30
+	bg.y = _H/2 + 50
 	settingsGroup:insert(bg)
 	bg:addEventListener( "tap", addHelpScreen )
 
@@ -79,9 +78,13 @@ function settingsScreen:enterScene(e)
 
 	creditsBtn = display.newImageRect("images/Credits@3x.png",284, 45)
 	creditsBtn.x = _W/2 
-	creditsBtn.y = _H/2 + 100
+	creditsBtn.y = _H/2 + 120
 	settingsGroup:insert(creditsBtn)
 	creditsBtn:addEventListener( "tap", addCreditsScreen )
+
+	highScoreFile =io.open( system.pathForFile("scorefile.txt", system.DocumentsDirectory), "r" )
+	highScoreText = display.newText("High Score: ".. highScoreFile:read("*a"), _W/2, _H/2 - 10, "8BIT Wonder", 20)
+
 
 end
 
@@ -96,7 +99,6 @@ end
  
 
 function backButtonTap(e)
-	print("tap")
 	storyboard.gotoScene("menuScreen")
 	helpGroup = nil
 end
@@ -107,26 +109,37 @@ function addCreditsScreen(e)
 	settingsGroup = nil
 	creditsGroup = display.newGroup()
 
-	bgCredits = display.newImageRect("images/stars2.png", _W, _H)
-	bgCredits.x = _W/2
-	bgCredits.y = _H/2
-	creditsGroup:insert(bgCredits)
-
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
 	sun.x = 70
 	sun.y = 30
 	creditsGroup:insert(sun)
 
-	mountain = display.newImageRect( "images/Moutnain@1x.png", 320, 141)
-	mountain.x = _W/2
-	mountain.y = _H - 60 - 50
-	creditsGroup:insert (mountain)
 
-
-	creditsTitle = display.newText("Credits", _W/2, 100, "8BIT WONDER", 24)
+	creditsTitle = display.newText("Credits", _W - 100, 30, "8BIT WONDER", 24)
 	creditsTitle:setFillColor(126/255,86/255,167/255)
 	creditsGroup:insert(creditsTitle)
 
+	backBtn = display.newImageRect("images/backBtn.png", 100, 30)
+	backBtn.x = 60
+	backBtn.y = 30
+	creditsGroup:insert(backBtn)
+	backBtn:addEventListener( "tap", backButtonTap )
+
+	local options  = {
+		text= "Programmers:\nAbhi Upadhyay, Cyrus Vachha, Rohan Jayaprakash, Yash Gupta, Rayyaan Mustafa \n\n Images:\nEthan Chacko and Ruslan Grebeniouk",
+		x = _W/2,
+		y = _H/2,
+		font = "Game Over",
+		fontSize = 65,
+		width = _W,
+		align = "center"
+	}
+
+
+	programmers = display.newText(options)
+	programmers.anchorX = 0.5
+	programmers.anchorY = 0.5
+	creditsGroup:insert(programmers)
 
 end
 
@@ -135,12 +148,7 @@ function addHelpScreen(e)
 	settingsGroup:removeSelf()
 	settingsGroup = nil
 	helpGroup = display.newGroup()
-	print("help tapped")
 
-	bgHelp = display.newImageRect("images/stars2.png", _W, _H)
-	bgHelp.x = _W/2
-	bgHelp.y = _H/2
-	helpGroup:insert(bgHelp)
 
 	sun = display.newImageRect("images/Space-Thingy@1x.png", 160, 88)
 	sun.x = 70
@@ -158,13 +166,12 @@ function addHelpScreen(e)
 
 	local options  = {
 		text = "Tilt your device left or right to guide Colonel Comet through the asteroid belt as he passes between obstacles.",
-		x = _W/2 + 10,
-		y = _H/2 + 150 - 20,
+		x = _W/2,
+		y = _H/2,
 		font = "Game Over",
 		fontSize = 65,
-		width = _W - 10,
-		height = _H,
-		align = center
+		width = _W - 10,--10 is the margin
+		align = "center"
 
 	}
 
@@ -190,6 +197,10 @@ function settingsScreen:exitScene(e)
 
 	if(not(helpGroup == nil))then
 		helpGroup:removeSelf()
+	end
+
+	if(not(creditsGroup == nil))then
+		creditsGroup:removeSelf()
 	end
 end
 

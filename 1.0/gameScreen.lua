@@ -1,23 +1,10 @@
-
 --initiating libraries 
 local storyboard = require ("storyboard")
 local physics = require("physics")
-
+local score = require("score")
 
 local gameScreen = storyboard.newScene("gameScreen")
 
---basic variables
-_W = display.contentWidth
-_H = display.contentHeight
-
-system.setIdleTimer(false)
-system.setAccelerometerInterval(40)
---game elements
-local bg
-local move = true
-local bg2
-local bg3
-local scoreChart
 local scoreText
 local scoreNumText
 local pauseButton
@@ -26,7 +13,7 @@ local startButton
 local playerBoost
 local mountain
 local sun
-local score = 0
+local scoreNum = 0
 local asteroid = {}
 local startGame = {}
 local spawnAsteroids = {}
@@ -97,13 +84,19 @@ function gameScreen:enterScene(e)
     scoreText:setFillColor(255/255,255/255,255/255)
     gameGroup:insert(scoreText)
     
-    scoreNumText = display.newText(tostring(score),_W - 30,17,"8BIT Wonder", 20)--insert proper font and scoreNum
-    scoreNumText:setFillColor( 255/255,255/255, 255/255 )
-    gameGroup:insert(scoreNumText)
+    scoreNumText = score.init({
+       fontSize = 20,
+       font = "8BIT Wonder",
+       x = _W - 50,
+       y = 15,
+       maxDigits = 7,
+       leadingZeros = false,
+       filename = "scorefile.txt",
+    })
     
-    score = 0
-    scoreNumText.text = tostring(score)
-    
+    scoreNum = 0
+    score.set(0)
+    scoreNumText.text = score.get()
     pauseButton = display.newImageRect("images/pauseBtn.png",50,50)--insert proper image
     pauseButton.anchorX = 0.5
     pauseButton.anchorY = 0.5
@@ -124,7 +117,6 @@ function gameScreen:enterScene(e)
         asteroidY = math.random(-800,-50)
         gameGroup:insert(asteroid[i])
     end
-
 end
 
 function pauseTouch(e)
@@ -153,7 +145,6 @@ function pauseTouch(e)
     startButton:removeEventListener( 'tap', startGame )
 
     function resumeGame()
-        print("resume")
         pauseGroup:removeSelf()
         resumeText:removeEventListener( "tap", resumeGame )
         menuText:removeEventListener( "tap", menuFunction )
@@ -162,7 +153,6 @@ function pauseTouch(e)
     end
 
     function menuFunction()
-        print "menu button pressed"
                 if (not(pauseGroup == nil)) then
                 pauseGroup:removeSelf()
         end
@@ -184,14 +174,17 @@ end
 function startGame(e)
     startButton:removeEventListener( 'tap', startGame )
     eventListeners("add")
-    print "The Game has Started!"
     startButton.isVisible = false
     physics:start()
 end   
 
 function updateScore()
-    score = score + 1 
-    scoreNumText.text = tostring(score)
+    scoreNum = scoreNum + 1
+    score.set(scoreNum + 1) 
+    scoreNumText.text = score.get()
+    if(score.get() > score.load())then
+        score.save()
+    end
 end
 
 
@@ -268,7 +261,7 @@ function event(action)
         local text = display.newText("Game Over!", _W/2, _H/2 - 70,"Game Over", 124)
         group:insert(text)
 
-        local scoreText = display.newText("Score: "..tostring(score), _W/2, _H/2- 10,"Game Over", 124)
+        local scoreText = display.newText("Score: "..tostring(score.get()), _W/2, _H/2- 10,"Game Over", 124)
         group:insert(scoreText)
             
          playAgain = display.newImageRect("images/playAgain.png",284, 45)
@@ -331,7 +324,6 @@ function gameScreen:exitScene(e)
     scoreNumText:removeSelf()
     scoreText:removeSelf()
     gameGroup = nil
-print "play again"
 end
 
 gameScreen:addEventListener("destroyScene",gameScreen)
