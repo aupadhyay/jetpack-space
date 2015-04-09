@@ -25,9 +25,9 @@ local developerBtn
 local mountain
 system.activate("multitouch")
 local music = audio.loadSound( "music/gameMusic.mp3" )
---local musicPlay = audio.play(music, {	channel = 3,
---		loops = -1
---	})
+local musicPlay = audio.play(music, {	channel = 3,
+		loops = -1
+	})
 
 --functions
 

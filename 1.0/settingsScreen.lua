@@ -35,12 +35,16 @@ function settingsScreen:enterScene(e)
 	settingsGroup = display.newGroup()
 	helpGroup = display.newGroup()
 
-
+	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
 	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 24)
 	text:setFillColor(126/255,86/255,167/255)
 	settingsGroup:insert(text)
-
-
+	else
+	text = display.newText("SETTINGS", 160,100, "8-bit", 24)
+	text:setFillColor(126/255,86/255,167/255)
+	settingsGroup:insert(text)	
+	end
+	
 	bg = display.newImageRect( "images/helpButton.png", 284, 45)
 	bg.x = _W/2 
 	bg.y = _H/2 + 50
@@ -83,9 +87,20 @@ function settingsScreen:enterScene(e)
 	creditsBtn:addEventListener( "tap", addCreditsScreen )
 
 	highScoreFile =io.open( system.pathForFile("scorefile.txt", system.DocumentsDirectory), "r" )
+	if(highScoreFile)then
+		print("highScoreFile Worked!")
+	else
+		highScoreFile = io.open(system.pathForFile("scorefile.txt", system.DocumentsDirectory), "w")
+		highScoreFile:write(0)
+		highScoreFile =io.open( system.pathForFile("scorefile.txt", system.DocumentsDirectory), "r" )
+	end
+	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
 	highScoreText = display.newText("High Score: ".. highScoreFile:read("*a"), _W/2, _H/2 - 10, "8BIT Wonder", 20)
-
-
+	settingsGroup:insert(highScoreText)
+	else
+	highScoreText = display.newText("High Score: ".. highScoreFile:read("*a"), _W/2, _H/2 - 10, "8-bit", 20)
+	settingsGroup:insert(highScoreText)	
+	end
 end
 
 
@@ -114,18 +129,23 @@ function addCreditsScreen(e)
 	sun.y = 30
 	creditsGroup:insert(sun)
 
-
+	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
 	creditsTitle = display.newText("Credits", _W - 100, 30, "8BIT WONDER", 24)
 	creditsTitle:setFillColor(126/255,86/255,167/255)
 	creditsGroup:insert(creditsTitle)
-
+	else
+	creditsTitle = display.newText("Credits", _W - 100, 30, "8-bit", 24)
+	creditsTitle:setFillColor(126/255,86/255,167/255)
+	creditsGroup:insert(creditsTitle)
+	end
 	backBtn = display.newImageRect("images/backBtn.png", 100, 30)
 	backBtn.x = 60
 	backBtn.y = 30
 	creditsGroup:insert(backBtn)
 	backBtn:addEventListener( "tap", backButtonTap )
-
-	local options  = {
+	local options
+	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
+		options  = {
 		text= "Programmers:\nAbhi Upadhyay, Cyrus Vachha, Rohan Jayaprakash, Yash Gupta, Rayyaan Mustafa \n\n Images:\nEthan Chacko and Ruslan Grebeniouk",
 		x = _W/2,
 		y = _H/2,
@@ -134,13 +154,21 @@ function addCreditsScreen(e)
 		width = _W,
 		align = "center"
 	}
-
-
+	else
+		options  = {
+		text= "Programmers:\nAbhi Upadhyay, Cyrus Vachha, Rohan Jayaprakash, Yash Gupta, Rayyaan Mustafa \n\n Images:\nEthan Chacko and Ruslan Grebeniouk",
+		x = _W/2,
+		y = _H/2,
+		font = "game_over",
+		fontSize = 65,
+		width = _W,
+		align = "center"
+	}
+	end
 	programmers = display.newText(options)
 	programmers.anchorX = 0.5
 	programmers.anchorY = 0.5
 	creditsGroup:insert(programmers)
-
 end
 
 function addHelpScreen(e)
@@ -159,22 +187,38 @@ function addHelpScreen(e)
 	mountain.x = _W/2
 	mountain.y = _H - 60 - 50
 	helpGroup:insert (mountain)
-
+	local options
+	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
 	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8BIT WONDER", 24)
 	helpTitle:setFillColor(126/255,86/255,167/255)
 	helpGroup:insert(helpTitle)
-
-	local options  = {
+	
+	options  = {
 		text = "Tilt your device left or right to guide Colonel Comet through the asteroid belt as he passes between obstacles.",
 		x = _W/2,
 		y = _H/2,
 		font = "Game Over",
 		fontSize = 65,
+		width = _W - 10,
+		align = "center"
+
+	}
+	else
+	helpTitle = display.newText("INSTRUCTIONS", 160,100, "8-bit", 24)
+	helpTitle:setFillColor(126/255,86/255,167/255)
+	helpGroup:insert(helpTitle)
+	
+	options  = {
+		text = "Tilt your device left or right to guide Colonel Comet through the asteroid belt as he passes between obstacles.",
+		x = _W/2,
+		y = _H/2,
+		font = "game_over",
+		fontSize = 65,
 		width = _W - 10,--10 is the margin
 		align = "center"
 
 	}
-
+	end
 
 	instructionPage = display.newText(options)
 	instructionPage.anchorX = 0.5
