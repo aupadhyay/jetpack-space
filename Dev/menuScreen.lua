@@ -33,7 +33,7 @@ local musicPlay = audio.play(music, {	channel = 3,
 		loops = -1
 	})
 
---functions
+--function
 
 function menuScreen:createScene(e)
 	gameListeners("add")
