@@ -176,7 +176,7 @@ function addCreditsScreen(e)
 	}
 	else
 		options  = {
-		text= "Programmers:\nAbhi Upadhyay, Cyrus Vachha, Rohan Jayaprakash, Yash Gupta, Rayyaan Mustafa \n\n Images:\nEthan Chacko and Ruslan Grebeniouk",
+		text= "Programmers:\nUpadhyay, Cyrus Vachha, Rohan Jayaprakash, Yash Gupta, Rayyaan Mustafa \n\n Images:\nEthan Chacko and Ruslan Grebeniouk",
 		x = _W/2,
 		y = _H/2,
 		font = "game_over",
