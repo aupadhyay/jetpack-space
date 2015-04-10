@@ -212,11 +212,11 @@ end
 
 function updateScore()
     scoreNum = scoreNum + 1
-    scoreMod.set(scoreNum + 1) 
-    scoreNumText.text = scoreMod.get()
-    if(scoreMod.get() > scoreMod.load())then
-        scoreMod.save()
-    end
+    --scoreMod.set(scoreNum + 1) 
+    --scoreNumText.text = scoreMod.get()
+    --if(scoreMod.get() > scoreMod.load())then
+      --  scoreMod.save()
+    --end
 end
 
 
