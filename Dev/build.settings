@@ -22,7 +22,8 @@ settings = {
                         {
                                 "game_over.ttf", 
                                 "Cocogoose.otf", 
-                                "8-bit.ttf"
+                                "8-bit.ttf",
+                                "PressStart2P.ttf"
                         }
         }
     },

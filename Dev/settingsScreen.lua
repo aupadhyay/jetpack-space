@@ -38,7 +38,7 @@ function settingsScreen:enterScene(e)
 	helpGroup = display.newGroup()
 
 	if((system.getInfo("platformName") == "iPhone OS") or (system.getInfo("environment") == "simulator"))then
-	text = display.newText("SETTINGS", 160,100, "8BIT WONDER", 24)
+	text = display.newText("SETTINGS", 160,100, "Press Start 2P", 24)
 	text:setFillColor(126/255,86/255,167/255)
 	settingsGroup:insert(text)
 	else
