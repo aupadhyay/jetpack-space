@@ -22,7 +22,7 @@ settings = {
                         {
                                 "game_over.ttf", 
                                 "Cocogoose.otf", 
-                                "8-bit.TTF"
+                                "8-bit.ttf"
                         }
         }
     },
