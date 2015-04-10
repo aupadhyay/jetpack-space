@@ -6,7 +6,11 @@ _H = display.contentHeight
 local storyboard = require("storyboard")
 local ads = require "ads"
 local provider = "admob"
-local appID
+if(system.getInfo("platformName") == "Android")then
+    appID = "ca-app-pub-6411000418609328/5551532299"
+elseif(system.getInfo("platformName") == "iPhone")then
+     appID= "ca-app-pub-6411000418609328/2598065893"
+end
 
 
 
@@ -33,6 +37,15 @@ local musicPlay = audio.play(music, {	channel = 3,
 
 function menuScreen:createScene(e)
 	gameListeners("add")
+	local function adListener( event )
+    end
+    if(system.getInfo("platformName") == "iPhone OS")then
+	    ads.init( adNetwork,"ca-app-pub-6411000418609328/2598065893", adListener )
+		ads.show( "banner",{ x=0, y=_H - 50, appID = "ca-app-pub-6411000418609328/2598065893"} )
+    else
+		ads.init( adNetwork,"ca-app-pub-6411000418609328/5551532299", adListener )
+		ads.show( "banner",{ x=0, y=_H - 50, appID = "ca-app-pub-6411000418609328/5551532299"} )	
+    end
 end
 
 
