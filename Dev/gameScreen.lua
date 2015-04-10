@@ -120,7 +120,6 @@ function gameScreen:enterScene(e)
     pauseButton.x = 35
     pauseButton.y = 35
     gameGroup:insert(pauseButton)
-    pauseButton:addEventListener( "tap", pauseTouch)
 
     local asteroidX = math.random(0, _W)
     local asteroidY = math.random(-800, -100)
@@ -186,13 +185,15 @@ function pauseTouch(e)
     function menuFunction()
                 if (not(pauseGroup == nil)) then
                 pauseGroup:removeSelf()
-        end
+     end   
 
         resumeText:removeEventListener( "tap", resumeGame )
         menuText:removeEventListener( "tap", menuFunction )
         scoreNumText:removeSelf()
         scoreText:removeSelf()
         storyboard.gotoScene( "menuScreen")
+
+
 
     end
     resumeText:addEventListener( "tap", resumeGame )
@@ -354,12 +355,14 @@ end
 local scoreTimer
 function eventListeners(action)
     if(action == "add")then
+        pauseButton:addEventListener( 'tap', pauseTouch )
         Runtime:addEventListener( "enterFrame", update )
         Runtime:addEventListener( "accelerometer",  movePlayer)
         Runtime:addEventListener('touch', boostPlayer)
         scoreTimer = timer.performWithDelay( 100,updateScore, -1 )
     end
     if(action == "remove")then
+        pauseButton:removeEventListener( 'tap', pauseTouch )
         Runtime:removeEventListener( "enterFrame", update )
         Runtime:removeEventListener( "accelerometer",  movePlayer)
         Runtime:removeEventListener('touch', boostPlayer)
@@ -370,11 +373,10 @@ end
 function gameScreen:exitScene(e)
     eventListeners("remove")
     gameGroup:removeSelf()
-    if(not(group == nil))then
-        group:removeSelf()
-    end
+   
     if(not(pauseGroup == nil))then
         pauseGroup:removeSelf()
+        pauseGroup = nil
     end
     pauseButton:removeEventListener('tap', pauseTouch)
     scoreNum = 0
