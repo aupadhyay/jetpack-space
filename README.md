@@ -1,4 +1,4 @@
-Jetpack Space
+Commander Comet
 =============
 
 CodeDay 2014 - [Blaze Game Studios](http://blazegamestudios.com)
@@ -6,15 +6,15 @@ CodeDay 2014 - [Blaze Game Studios](http://blazegamestudios.com)
 Developers
 -------------
 
-<p style="color:#61D5FF;">Abhi Upadhyay</p>
-<b>Cyrus Vachha</b>
-<b>Rohan Jayaprakash</b>
-<b>Rayyaan Mustafa</b>
+<b>Abhi Upadhyay</b><br>
+<b>Cyrus Vachha</b><br>
+<b>Rohan Jayaprakash</b><br>
+<b>Rayyaan Mustafa</b><br>
 <b>Yash Gupta</b>
 
 
 Artwork
 -------------
 
-<b>Ethan Chacko</b>
+<b>Ethan Chacko</b><br>
 <b>Ruslan Grebeniouk</b>
