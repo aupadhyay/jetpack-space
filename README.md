@@ -1,7 +1,7 @@
 Commander Comet
 =============
 
-CodeDay 2014 - [Blaze Game Studios](http://blazegamestudios.com)
+CodeDay Nov' 2014 - [Blaze Game Studios](http://blazegamestudios.com)
 
 Developers
 -------------
